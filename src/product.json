@@ -1,0 +1,34 @@
+
+{
+    "product_id": 1,
+    "product_name": "Heat-Resistant Oven Mitts",
+    "brand": "KitchenPro",
+    "price": 12.99,
+    "description": "Protect your hands while handling hot cookware with these heat-resistant oven mitts.",
+    "colors": ["Red", "Blue", "Black"],
+    "in_stock": true,
+    "weight": 200,
+    "product_picture": "oven_mitts.jpg",
+    "reviews": []
+  }
+  
+  {
+    "product_id": 2,
+    "product_name": "Non-Stick Baking Pan",
+    "brand": "BakeMaster",
+    "price": 19.99,
+    "description": "Bake delicious treats without worrying about sticking with this non-stick baking pan.",
+    "colors": ["Silver"],
+    "in_stock": true,
+    "weight": 400,
+    "product_picture": "baking_pan.jpg",
+    "product_video": "baking_pan.mp4",
+    "reviews": [
+      {
+        "user": "baker87",
+        "rating": 5,
+        "comment": "Best baking pan I've ever used. Nothing sticks to it!"
+      }
+    ]
+  }
+  
