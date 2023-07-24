@@ -64,6 +64,26 @@ console.log(username);
 });
 
 
+// Add new user with register page
+app.post('/register', (req, res) => {
+  const {username,email, userpassword} = req.body;
+  // Perform validation checks on the username and password
+  if (!username || !userpassword) {
+    return res.status(400).json({ error: 'Username and password are required' });
+  }
+
+  const query = 'INSERT INTO users (username, userpassword) VALUES (?, ?)';
+  connection.query(query, [username, userpassword], (error, results) => {
+    if (error) {
+      console.error('Error executing the query: ', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.status(200).json({ message: 'User registered successfully' });
+    }
+  });
+  
+});
+
 
 
   
