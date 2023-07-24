@@ -1,17 +1,18 @@
 import React, { useState,createContext } from 'react';
 import {  useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function Login() {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [userpassword, setUserPassword] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       let response = await fetch(`http://localhost:3000/login?username=${username}`);
+      console.log("response:" + response);
       let data = await response.json();
-      if (data.length && data[0].password === password)  {
+      if (data.length && data[0].userpassword === parseInt(userpassword, 10)) {
         response = await fetch(`http://localhost:3000/users?username=${username}`);
         data = await response.json();
         localStorage.setItem('username', JSON.stringify(data[0]));
@@ -38,7 +39,7 @@ function LoginPage() {
       <br />
       <label>
         Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" value={userpassword} onChange={(e) => setUserPassword(e.target.value)} />
       </label>
       <br />
       <button type="submit" onClick={handleLogin}>Login</button>
@@ -49,4 +50,4 @@ function LoginPage() {
 }
 
 
-export default LoginPage;
+export default Login;
