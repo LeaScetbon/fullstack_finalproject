@@ -9,11 +9,12 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      let response = await fetch(`http://localhost:3000/login?username=${username}`);
-      console.log("response:" + response);
+      let response = await fetch(`http://localhost:3001/login?username=${username}`);
+      console.log(response);
       let data = await response.json();
+      console.log(data);
       if (data.length && data[0].userpassword === parseInt(userpassword, 10)) {
-        response = await fetch(`http://localhost:3000/users?username=${username}`);
+        response = await fetch(`http://localhost:3001/users?username=${username}`);
         data = await response.json();
         localStorage.setItem('username', JSON.stringify(data[0]));
         navigate("/application")

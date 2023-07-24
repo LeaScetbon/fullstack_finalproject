@@ -7,8 +7,8 @@ app.use(cors());
 app.use(express.json());
 
 // Start the server
-app.listen(3000, () => {
-  console.log('Server listening on port 3000');
+app.listen(3001, () => {
+  console.log('Server listening on port 3001');
 }); 
 
 // Create a connection to the MySQL database
@@ -28,24 +28,41 @@ connection.connect((error) => {
     console.log('Connected to the database');
   }
  
-  app.get('/login', (req, res) => {
-    const { username } = req.query;
-    console.log(req)
-    // Execute the query to retrieve user data based on the username
-    const query = 'SELECT * FROM users WHERE username = ?';
-    connection.query(query, [username], (error, results) => {
-      console.log(error);
-      console.log("results:" + results);
+  
+});
+app.get('/login', (req, res) => {
+  const { username } = req.query;
+  //console.log(req)
+  // Execute the query to retrieve user data based on the username
+  const query = 'SELECT * FROM users WHERE username = ?';
+  connection.query(query, [username], (error, results) => {
+    console.log(error);
+    console.log(results);
+    if (error) {
+        console.error('Error executing the query: ', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+        
+        res.json(results);
+    }
+  });
+});
+
+app.get('/users', (req, res) => {
+  const { username } = req.query;
+console.log(username);
+  // Execute the query to retrieve user data based on the username
+  const query = 'SELECT * FROM users WHERE username = ?';
+  connection.query(query, [username], (error, results) => {
       if (error) {
           console.error('Error executing the query: ', error);
           res.status(500).json({ error: 'Internal Server Error' });
       } else {
-          
           res.json(results);
       }
-    });
   });
 });
+
 
 
 
