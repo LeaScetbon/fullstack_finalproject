@@ -47,14 +47,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 `;
 
-const usersData = [
-  {
-    id: 1,
-    name: "Lea",
-    email: "lea@gmail.com",
-    usertype: "client",
-    userpassword: 1234,
-  },
+,
   {
     id: 2,
     name: "Jane Smith",
@@ -375,3 +368,19 @@ CREATE TABLE IF NOT EXISTS reviews (
   comment TEXT NOT NULL,
   FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE
 );`;
+
+const createRecipeTableQuery = `
+CREATE TABLE Recipe (
+  receipt_id INT PRIMARY KEY,
+  receipt_name VARCHAR(100),
+  link VARCHAR(255),
+  receipt_pdf BLOB -- Binary Large Object to store the PDF data
+);`;
+
+const insertIntoRecipeQuery = `
+INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf)
+VALUES
+    (1, 'Chocolate Cake Recipe', 'https://www.example.com/video1', 'chocolate_cake_recipe.pdf'),
+    (2, 'Chicken Alfredo Recipe', 'https://www.example.com/video2', 'chicken_alfredo_recipe.pdf'),
+    (3, 'Vegetable Stir-Fry Recipe', 'https://www.example.com/video3', 'vegetable_stir_fry_recipe.pdf');
+`;
