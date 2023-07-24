@@ -7,34 +7,49 @@ const con = mysql.createConnection({
   password: "DaphnaAura19",
 });
 
-// Connect to the MySQL server
-con.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected!");
+// Create the database
+con.query(
+  "CREATE DATABASE IF NOT EXISTS fullStackFinalDB",
+  function (err, result) {
+    if (err) throw err;
+    console.log("Database created or already exists");
 
-  // Create the database
-  con.query(
-    "CREATE DATABASE IF NOT EXISTS fullStackFinalDB",
-    function (err, result) {
+    // Use the newly created database
+    con.query("USE fullStackFinalDB", function (err, result) {
       if (err) throw err;
-      console.log("Database created or already exists");
+      console.log("Database selected");
 
-      // Use the newly created database
-      con.query("USE fullStackFinalDB", function (err, result) {
+      // Rest of your code (create users table and insert data) here...
+      con.query(createUsersTableQuery, (err, results) => {
         if (err) throw err;
-        console.log("Database selected");
+        console.log("user table created successfully");
 
-        // Rest of your code (create users table and insert data) here...
-
-        // Close the connection after completing all queries
-        con.end(function (err) {
+        // Insert users data into the table
+        con.query(insertUserQuery, [userDataValues], (err, results) => {
           if (err) throw err;
-          console.log("Connection closed");
+          console.log("Users data inserted successfully");
+
+          con.query(createProductsTableQuery, (err, results) => {
+            if (err) throw err;
+            console.log("product table created successfully");
+
+            // Insert products data into the table
+            con.query(insertProductQuery, [ProductsData], (err, results) => {
+              if (err) throw err;
+              console.log("Products data inserted successfully");
+
+              // Close the connection after completing all queries
+              con.end(function (err) {
+                if (err) throw err;
+                console.log("Connection closed");
+              });
+            });
+          });
         });
       });
-    }
-  );
-});
+    });
+  }
+);
 
 // create users table
 const createUsersTableQuery = `
@@ -42,71 +57,78 @@ CREATE TABLE IF NOT EXISTS users (
   id INT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  usertype VARCHAR(255) NOT NULL
+  usertype VARCHAR(255) NOT NULL,
   userpassword INT NOT NULL 
 );
 `;
 
-,
+const usersData = [
+  {
+    id: 1,
+    username: "Lea",
+    email: "lea@gmail.com",
+    usertype: "client",
+    userpassword: 1234,
+  },
   {
     id: 2,
-    name: "Jane Smith",
+    username: "Jane Smith",
     email: "jane.smith@gmail.com",
     usertype: "client",
     userpassword: 56,
   },
   {
     id: 3,
-    name: "Michael Johnson",
+    username: "Michael Johnson",
     email: "michael.johnson@gmail.com",
     usertype: "client",
     userpassword: 7,
   },
   {
     id: 4,
-    name: "Emily Brown",
+    username: "Emily Brown",
     email: "emily.brown@gmail.com",
     usertype: "client",
     userpassword: 8,
   },
   {
     id: 5,
-    name: "William Lee",
+    username: "William Lee",
     email: "william.lee@gmail.com",
     usertype: "client",
     userpassword: 9,
   },
   {
     id: 6,
-    name: "Sophia Martinez",
+    username: "Sophia Martinez",
     email: "sophia.martinez@gmail.com",
     usertype: "client",
     userpassword: 111,
   },
   {
     id: 7,
-    name: "Oliver Wilson",
+    username: "Oliver Wilson",
     email: "oliver.wilson@gmail.com",
     usertype: "client",
     userpassword: 756,
   },
   {
     id: 8,
-    name: "Ava Johnson",
+    username: "Ava Johnson",
     email: "ava.johnson@gmail.com",
     usertype: "client",
     userpassword: 25,
   },
   {
     id: 9,
-    name: "Ethan Taylor",
+    username: "Ethan Taylor",
     email: "ethan.taylor@gmail.com",
     usertype: "client",
     userpassword: 482,
   },
   {
     id: 10,
-    name: "Isabella Anderson",
+    username: "Isabella Anderson",
     email: "isabella.anderson@gmail.com",
     usertype: "client",
     userpassword: 9876,
