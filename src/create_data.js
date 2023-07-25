@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DaphnaAura19",
+  password: "password",
 });
 
 // Create the database
@@ -381,28 +381,44 @@ const ProductsData = [
   },
 ];
 
-const createReviewsTableQuery = `
-CREATE TABLE IF NOT EXISTS reviews (
-  review_id INT PRIMARY KEY,
-  product_id INT NOT NULL,
-  user VARCHAR(255) NOT NULL,
-  rating DECIMAL(2, 1) NOT NULL,
-  comment TEXT NOT NULL,
-  FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE
-);`;
-
 const createRecipeTableQuery = `
 CREATE TABLE Recipe (
   receipt_id INT PRIMARY KEY,
   receipt_name VARCHAR(100),
   link VARCHAR(255),
-  receipt_pdf BLOB -- Binary Large Object to store the PDF data
+  receipt_pdf BLOB, -- Binary Large Object to store the PDF data
+  picture_url VARCHAR(255) -- Text field to store the URL of the picture
 );`;
 
 const insertIntoRecipeQuery = `
-INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf)
+INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url)
 VALUES
-    (1, 'Chocolate Cake Recipe', 'https://www.example.com/video1', 'chocolate_cake_recipe.pdf'),
-    (2, 'Chicken Alfredo Recipe', 'https://www.example.com/video2', 'chicken_alfredo_recipe.pdf'),
-    (3, 'Vegetable Stir-Fry Recipe', 'https://www.example.com/video3', 'vegetable_stir_fry_recipe.pdf');
+    (1, 'Chocolate Cake Recipe', 'https://www.youtube.com/watch?v=_fJGviO5WQE', 'chocolate_cake_recipe.pdf', 'chocolate_cake_picture.jpeg'),
+    (2, 'Blueberry Muffins', 'https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins', 'blueberry_muffins_recipe.pdf', 'blueberry_muffins_picture.jpeg'),
+    (3, 'Apple Pie', 'https://www.youtube.com/watch?v=VFQsDAADPLM', 'apple_pie_recipe.pdf', 'apple_pie_picture.jpeg'),
+    (4, 'Banana Bread', 'https://www.youtube.com/watch?v=qUmDpPfY_h0', 'banana_bread_recipe.pdf', 'https://www.example.com/banana_bread_picture.jpg'),
+    (5, 'Carrot Cake', 'https://www.youtube.com/watch?v=zoyhs-EiJxE', 'carrot_cake_recipe.pdf', 'carrot_cake_picture.jpeg');
+`;
+const createReviewsTableQuery = `
+CREATE TABLE IF NOT EXISTS reviews (
+  review_id INT PRIMARY KEY,
+  recipe_id INT NOT NULL,
+  user VARCHAR(255) NOT NULL,
+  rating DECIMAL(2, 1) NOT NULL,
+  comment TEXT NOT NULL,
+  FOREIGN KEY (recipe_id) REFERENCES Recipe (receipt_id) ON DELETE CASCADE
+);`;
+const insertIntoReviewsQuery = `
+INSERT INTO reviews (review_id, recipe_id, user, rating, comment)
+VALUES
+    (1, 1, 'Alice', 4.5, 'Delicious chocolate cake! The whole family loved it.'),
+    (2, 1, 'Bob', 5.0, 'The best chocolate cake I've ever had! A must-try recipe.'),
+    (3, 2, 'Charlie', 4.0, 'Yummy blueberry muffins! Perfect for breakfast.'),
+    (4, 2, 'David', 4.5, 'Great recipe! I added a little lemon zest for extra flavor.'),
+    (5, 3, 'Eva', 4.8, 'Classic apple pie recipe. Always a crowd-pleaser!'),
+    (6, 3, 'Frank', 3.5, 'The pie was good, but I prefer a sweeter filling.'),
+    (7, 4, 'Grace', 4.2, 'Delicious banana bread! Moist and flavorful.'),
+    (8, 4, 'Hannah', 4.0, 'Nice recipe! I added some walnuts for extra crunch.'),
+    (9, 5, 'Isaac', 4.7, 'Wonderful carrot cake! Cream cheese frosting is perfect.'),
+    (10, 5, 'Jane', 4.3, 'Carrot cake is not my favorite, but this recipe was good.');
 `;
