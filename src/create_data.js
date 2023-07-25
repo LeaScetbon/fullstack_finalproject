@@ -28,23 +28,22 @@ con.query(
         // con.query(insertUserQuery, [userDataValues], (err, results) => {
         //   if (err) throw err;
         //   console.log("Users data inserted successfully");
-
-          con.query(createProductsTableQuery, (err, results) => {
+        con.query(createProductsTableQuery, (err, results) => {
+          if (err) throw err;
+          console.log("product table created successfully");
+        
+          // Insert products data into the table
+          con.query(insertProductQuery, [productDataValues], (err, results) => {
             if (err) throw err;
-            console.log("product table created successfully");
-
-            // Insert products data into the table
-            con.query(insertProductQuery, [ProductsData], (err, results) => {
+            console.log("Products data inserted successfully");
+        
+            // Close the connection after completing all queries
+            con.end(function (err) {
               if (err) throw err;
-              console.log("Products data inserted successfully");
-
-              // Close the connection after completing all queries
-              con.end(function (err) {
-                if (err) throw err;
-                console.log("Connection closed");
-              });
+              console.log("Connection closed");
             });
           });
+        });
         //});
       });
     });
@@ -381,14 +380,18 @@ const ProductsData = [
   },
 ];
 
-const insertProductQuery = "INSERT INTO products VALUES ?";
+const insertProductQuery = "INSERT INTO products (product_id, product_name, brand, price, description, colors, in_stock, weight, product_picture) VALUES ?";
 
-const productDataValues = usersData.map((user) => [
-  user.id,
-  user.username,
-  user.email,
-  user.usertype,
-  user.userpassword,
+const productDataValues = ProductsData.map((product) => [
+  product.product_id,
+  product.product_name,
+  product.brand,
+  product.price,
+  product.description,
+  JSON.stringify(product.colors),
+  product.in_stock,
+  product.weight,
+  product.product_picture,
 ]);
 
 const createRecipeTableQuery = `

@@ -93,7 +93,10 @@ static async getUserByUsernameAndPassword(username, password) {
     return await RestAPI.fetchData(url, options);
   }
 
-  
+  static async getAllProducts() {
+    const url = `${BASE_URL}/api/products`;
+    return await RestAPI.fetchData(url);
+  }
  
   
 }

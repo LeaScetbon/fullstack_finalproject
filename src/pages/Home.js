@@ -14,16 +14,16 @@ function Home() {
         <nav>
           <ul>
             <li>
-              <Link to={`/users/${user.id}/Recipies`}>Recipies</Link>
+              <Link to={`/Recipies`}>Recipies</Link>
             </li>
             <li>
-              <Link to={`/users/${user.id}/Products`}>Products</Link>
+              <Link to={`/products`}>Products</Link>
             </li>
             <li>
               <Link to={`/users/${user.id}/MyCart`}>My Cart</Link>
             </li>
             <li>
-              <Link to={`/users/${user.id}/About`}>About</Link>
+              <Link to={`/About`}>About</Link>
             </li>
             
             
