@@ -408,6 +408,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   comment TEXT NOT NULL,
   FOREIGN KEY (recipe_id) REFERENCES Recipe (receipt_id) ON DELETE CASCADE
 );`;
+
 const insertIntoReviewsQuery = `
 INSERT INTO reviews (review_id, recipe_id, user, rating, comment)
 VALUES
