@@ -19,7 +19,7 @@ function Login() {
         response = await fetch(`http://localhost:3001/users?username=${username}`);
         data = await response.json();
         localStorage.setItem('username', JSON.stringify(data[0]));
-        navigate("/application")
+        navigate("/home")
       } else {
         alert('Invalid username or password');
       }

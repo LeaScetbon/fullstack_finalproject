@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "DaphnaAura19",
 });
 
 // Create the database
@@ -25,9 +25,9 @@ con.query(
         console.log("user table created successfully");
 
         // Insert users data into the table
-        con.query(insertUserQuery, [userDataValues], (err, results) => {
-          if (err) throw err;
-          console.log("Users data inserted successfully");
+        // con.query(insertUserQuery, [userDataValues], (err, results) => {
+        //   if (err) throw err;
+        //   console.log("Users data inserted successfully");
 
           con.query(createProductsTableQuery, (err, results) => {
             if (err) throw err;
@@ -45,7 +45,7 @@ con.query(
               });
             });
           });
-        });
+        //});
       });
     });
   }
@@ -380,6 +380,16 @@ const ProductsData = [
     reviews: [],
   },
 ];
+
+const insertProductQuery = "INSERT INTO products VALUES ?";
+
+const productDataValues = usersData.map((user) => [
+  user.id,
+  user.username,
+  user.email,
+  user.usertype,
+  user.userpassword,
+]);
 
 const createRecipeTableQuery = `
 CREATE TABLE Recipe (
