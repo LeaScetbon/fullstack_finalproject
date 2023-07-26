@@ -20,6 +20,23 @@ function Products() {
         fetchProductsFromServer();
       }, []);
 
+      const handleAddToCart = async (productId) => {
+        try {
+          const userId = JSON.parse(localStorage.getItem('username')).id;
+          await fetch(`http://localhost:3001/users/${userId}/cart`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ productId }),
+          });
+          alert('Product added to your cart successfully');
+        } catch (error) {
+          console.error(error);
+          alert('An error occurred while adding the product to your cart');
+        }
+      };
+
       return (
         <div className='product'>
       <h2>Products</h2>
@@ -31,6 +48,9 @@ function Products() {
               src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
             />
+             <button onClick={() => handleAddToCart(product.product_id)}>
+              Add to My Cart
+            </button>
           </div>
         ))}
       </div>

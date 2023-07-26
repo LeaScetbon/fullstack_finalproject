@@ -97,7 +97,24 @@ static async getUserByUsernameAndPassword(username, password) {
     const url = `${BASE_URL}/api/products`;
     return await RestAPI.fetchData(url);
   }
- 
+  
+  static async addToCart(userId, productId) {
+    const url = `${BASE_URL}/api/mycart`;
+    const body = { user_id: userId, product_id: productId };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+    return await RestAPI.fetchData(url, options);
+  }
+  
+  static async getCartByUserId(userId) {
+    const url = `${BASE_URL}/api/mycart/${userId}`;
+    return await RestAPI.fetchData(url);
+  }
   
 }
 

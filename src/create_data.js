@@ -39,9 +39,12 @@ con.query(
           // con.query(createRecipeTableQuery, (err, results) => {
           //      if (err) throw err;
           //      console.log("recipe table created successfully");
-           con.query(insertIntoRecipeQuery, [recipeDataValues], (err, results) => {
+          con.query(createCartTableQuery, (err, results) => {
               if (err) throw err;
-              console.log("Recipes data inserted successfully");
+               console.log("mycart table created successfully");
+          //  con.query(insertIntoRecipeQuery, [recipeDataValues], (err, results) => {
+          //     if (err) throw err;
+          //     console.log("Recipes data inserted successfully");
             
                // Close the connection after completing all queries
             con.end(function (err) {
@@ -400,94 +403,102 @@ const productDataValues = ProductsData.map((product) => [
   product.product_picture,
 ]);
 
-const createRecipeTableQuery = `
-CREATE TABLE Recipe (
-  receipt_id INT PRIMARY KEY,
-  receipt_name VARCHAR(100),
-  link VARCHAR(255),
-  receipt_pdf BLOB, -- Binary Large Object to store the PDF data
-  picture_url VARCHAR(255) -- Text field to store the URL of the picture
+// const createRecipeTableQuery = `
+// CREATE TABLE Recipe (
+//   receipt_id INT PRIMARY KEY,
+//   receipt_name VARCHAR(100),
+//   link VARCHAR(255),
+//   receipt_pdf BLOB, -- Binary Large Object to store the PDF data
+//   picture_url VARCHAR(255) -- Text field to store the URL of the picture
+// );`;
+
+// const insertIntoRecipeQuery = `
+// INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url)
+// VALUES
+//     (1, 'Chocolate Cake Recipe', 'https://www.youtube.com/watch?v=_fJGviO5WQE', 'chocolate_cake_recipe.pdf', 'chocolate_cake_picture.jpeg'),
+//     (2, 'Blueberry Muffins', 'https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins', 'blueberry_muffins_recipe.pdf', 'blueberry_muffins_picture.jpeg'),
+//     (3, 'Apple Pie', 'https://www.youtube.com/watch?v=VFQsDAADPLM', 'apple_pie_recipe.pdf', 'apple_pie_picture.jpeg'),
+//     (4, 'Banana Bread', 'https://www.youtube.com/watch?v=qUmDpPfY_h0', 'banana_bread_recipe.pdf', 'https://www.example.com/banana_bread_picture.jpg'),
+//     (5, 'Carrot Cake', 'https://www.youtube.com/watch?v=zoyhs-EiJxE', 'carrot_cake_recipe.pdf', 'carrot_cake_picture.jpeg');
+// `;
+
+// const RecipeData = [
+//   {
+//     receipe_id: 1,
+//     receipe_name: "Chocolate Cake Recipe",
+//     link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
+//     receipt_pdf: "chocolate_cake_recipe.pdf",
+//     picture_url: "chocolate_cake_picture.jpeg"
+//   },
+//   {
+//     receipe_id: 2,
+//     receipe_name: "Blueberry Muffins",
+//     link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
+//     receipt_pdf: "blueberry_muffins_recipe.pdf",
+//     picture_url: "blueberry_muffins_picture.jpeg"
+//   },
+//   {
+//     receipe_id: 3,
+//     receipe_name: "Apple Pie",
+//     link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
+//     receipt_pdf: "apple_pie_recipe.pdf",
+//     picture_url: "apple_pie_picture.jpeg"
+//   },
+//   {
+//     receipe_id: 4,
+//     receipe_name: "Banana Bread",
+//     link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
+//     receipt_pdf: "banana_bread_recipe.pdf",
+//     picture_url: "https://www.example.com/banana_bread_picture.jpg"
+//   },
+//   {
+//     receipe_id: 5,
+//     receipe_name: "Carrot Cake",
+//     link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
+//     receipt_pdf: "carrot_cake_recipe.pdf",
+//     picture_url: "carrot_cake_picture.jpeg"
+//   }
+// ];
+
+// const recipeDataValues = RecipeData.map((recipe) => [
+//   recipe.recipe_id,
+//   recipe.recipe_name,
+//   recipe.ink,
+//   recipe.receipt_pdf,
+//   recipe.picture_url,
+// ]);
+
+// const createReviewsTableQuery = `
+// CREATE TABLE IF NOT EXISTS reviews (
+//   review_id INT PRIMARY KEY,
+//   recipe_id INT NOT NULL,
+//   user VARCHAR(255) NOT NULL,
+//   rating DECIMAL(2, 1) NOT NULL,
+//   comment TEXT NOT NULL,
+//   FOREIGN KEY (recipe_id) REFERENCES Recipe (receipt_id) ON DELETE CASCADE
+// );`;
+
+
+
+// const insertIntoReviewsQuery = `
+// INSERT INTO reviews (review_id, recipe_id, user, rating, comment)
+// VALUES
+//     (1, 1, 'Alice', 4.5, 'Delicious chocolate cake! The whole family loved it.'),
+//     (2, 1, 'Bob', 5.0, 'The best chocolate cake I've ever had! A must-try recipe.'),
+//     (3, 2, 'Charlie', 4.0, 'Yummy blueberry muffins! Perfect for breakfast.'),
+//     (4, 2, 'David', 4.5, 'Great recipe! I added a little lemon zest for extra flavor.'),
+//     (5, 3, 'Eva', 4.8, 'Classic apple pie recipe. Always a crowd-pleaser!'),
+//     (6, 3, 'Frank', 3.5, 'The pie was good, but I prefer a sweeter filling.'),
+//     (7, 4, 'Grace', 4.2, 'Delicious banana bread! Moist and flavorful.'),
+//     (8, 4, 'Hannah', 4.0, 'Nice recipe! I added some walnuts for extra crunch.'),
+//     (9, 5, 'Isaac', 4.7, 'Wonderful carrot cake! Cream cheese frosting is perfect.'),
+//     (10, 5, 'Jane', 4.3, 'Carrot cake is not my favorite, but this recipe was good.');
+// `;
+const createCartTableQuery = 
+`CREATE TABLE IF NOT EXISTS mycart (
+  cart_id INT AUTO_INCREMENT PRIMARY KEY,
+  id INT NOT NULL,
+  product_id INT NOT NULL,
+  FOREIGN KEY (id) REFERENCES users (id),
+  FOREIGN KEY (product_id) REFERENCES products (product_id)
 );`;
-
-const insertIntoRecipeQuery = `
-INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url)
-VALUES
-    (1, 'Chocolate Cake Recipe', 'https://www.youtube.com/watch?v=_fJGviO5WQE', 'chocolate_cake_recipe.pdf', 'chocolate_cake_picture.jpeg'),
-    (2, 'Blueberry Muffins', 'https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins', 'blueberry_muffins_recipe.pdf', 'blueberry_muffins_picture.jpeg'),
-    (3, 'Apple Pie', 'https://www.youtube.com/watch?v=VFQsDAADPLM', 'apple_pie_recipe.pdf', 'apple_pie_picture.jpeg'),
-    (4, 'Banana Bread', 'https://www.youtube.com/watch?v=qUmDpPfY_h0', 'banana_bread_recipe.pdf', 'https://www.example.com/banana_bread_picture.jpg'),
-    (5, 'Carrot Cake', 'https://www.youtube.com/watch?v=zoyhs-EiJxE', 'carrot_cake_recipe.pdf', 'carrot_cake_picture.jpeg');
-`;
-
-const RecipeData = [
-  {
-    receipe_id: 1,
-    receipe_name: "Chocolate Cake Recipe",
-    link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
-    receipt_pdf: "chocolate_cake_recipe.pdf",
-    picture_url: "chocolate_cake_picture.jpeg"
-  },
-  {
-    receipe_id: 2,
-    receipe_name: "Blueberry Muffins",
-    link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
-    receipt_pdf: "blueberry_muffins_recipe.pdf",
-    picture_url: "blueberry_muffins_picture.jpeg"
-  },
-  {
-    receipe_id: 3,
-    receipe_name: "Apple Pie",
-    link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
-    receipt_pdf: "apple_pie_recipe.pdf",
-    picture_url: "apple_pie_picture.jpeg"
-  },
-  {
-    receipe_id: 4,
-    receipe_name: "Banana Bread",
-    link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
-    receipt_pdf: "banana_bread_recipe.pdf",
-    picture_url: "https://www.example.com/banana_bread_picture.jpg"
-  },
-  {
-    receipe_id: 5,
-    receipe_name: "Carrot Cake",
-    link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
-    receipt_pdf: "carrot_cake_recipe.pdf",
-    picture_url: "carrot_cake_picture.jpeg"
-  }
-];
-
-const recipeDataValues = RecipeData.map((recipe) => [
-  recipe.recipe_id,
-  recipe.recipe_name,
-  recipe.ink,
-  recipe.receipt_pdf,
-  recipe.picture_url,
-]);
-
-const createReviewsTableQuery = `
-CREATE TABLE IF NOT EXISTS reviews (
-  review_id INT PRIMARY KEY,
-  recipe_id INT NOT NULL,
-  user VARCHAR(255) NOT NULL,
-  rating DECIMAL(2, 1) NOT NULL,
-  comment TEXT NOT NULL,
-  FOREIGN KEY (recipe_id) REFERENCES Recipe (receipt_id) ON DELETE CASCADE
-);`;
-
-
-
-const insertIntoReviewsQuery = `
-INSERT INTO reviews (review_id, recipe_id, user, rating, comment)
-VALUES
-    (1, 1, 'Alice', 4.5, 'Delicious chocolate cake! The whole family loved it.'),
-    (2, 1, 'Bob', 5.0, 'The best chocolate cake I've ever had! A must-try recipe.'),
-    (3, 2, 'Charlie', 4.0, 'Yummy blueberry muffins! Perfect for breakfast.'),
-    (4, 2, 'David', 4.5, 'Great recipe! I added a little lemon zest for extra flavor.'),
-    (5, 3, 'Eva', 4.8, 'Classic apple pie recipe. Always a crowd-pleaser!'),
-    (6, 3, 'Frank', 3.5, 'The pie was good, but I prefer a sweeter filling.'),
-    (7, 4, 'Grace', 4.2, 'Delicious banana bread! Moist and flavorful.'),
-    (8, 4, 'Hannah', 4.0, 'Nice recipe! I added some walnuts for extra crunch.'),
-    (9, 5, 'Isaac', 4.7, 'Wonderful carrot cake! Cream cheese frosting is perfect.'),
-    (10, 5, 'Jane', 4.3, 'Carrot cake is not my favorite, but this recipe was good.');
-`;

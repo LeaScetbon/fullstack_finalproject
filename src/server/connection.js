@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "DaphnaAura19",
   database: "fullStackFinalDB", // Replace "your_database_name" with the actual name of your database
 });
 
