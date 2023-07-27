@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+  
+  }
+  
+
+  body {
+    margin: 0;
+  }
+  
+  .container {
+    margin: 1rem;
+    text-align: center;
+  }
+  
+  .nav {
+    background-color: #f481cd;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+  
+  }
+  
+  .site-title {
+    font-size: 2rem;
+    
+    
+  }
+  
+  .nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav a {
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: .25rem;
+  }
+  
+  .nav li.active {
+    background-color: #c6118a;
+    height: 100%;
+  }
+  
+  .nav li:hover {
+    background-color: #c6118a;
+    
+  }
+
+
+
+  .logout-icon {
+    width: 24px;
+    height: 24px;
+    fill: #fff; /* Set the color of the logout icon */
+    background-color: transparent; /* Set the background color to be transparent */
+    height: 100%
+    
+}
