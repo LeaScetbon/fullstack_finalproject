@@ -7,6 +7,7 @@ import Register from "./pages/register";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import MyCart from "./pages/MyCart";
+import Recipies from "./pages/Recipies";
 import "./App.css";
 import Navbar from "./pages/Navbar";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/users/:userId/MyCart" element={<MyCart />} />
+          <Route path="/Recipies" element={<Recipies />} />
         </Routes>
       </div>
     </>

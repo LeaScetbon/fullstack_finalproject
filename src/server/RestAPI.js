@@ -97,6 +97,10 @@ static async getUserByUsernameAndPassword(username, password) {
     const url = `${BASE_URL}/api/products`;
     return await RestAPI.fetchData(url);
   }
+  static async getAllRecipes() {
+    const url = `${BASE_URL}/api/Recipe`;
+    return await RestAPI.fetchData(url);
+  }
   
   static async addToCart(userId, productId) {
     const url = `${BASE_URL}/api/mycart`;
