@@ -23,7 +23,7 @@ function Products() {
       const handleAddToCart = async (productId) => {
         try {
           const userId = JSON.parse(localStorage.getItem('username')).id;
-          await fetch(`http://localhost:3001/users/${userId}/cart`, {
+          await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -52,7 +52,8 @@ function Products() {
               Add to My Cart
             </button>
           </div>
-        ))}
+        ))
+        }
       </div>
     </div>
   );

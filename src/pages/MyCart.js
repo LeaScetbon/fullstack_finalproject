@@ -10,6 +10,7 @@ function MyCart() {
       const userId = JSON.parse(localStorage.getItem('username')).id;
       const response = await fetch(`http://localhost:3001/users/${userId}/mycart`);
       const data = await response.json();
+      console.log(data)
       setCartProducts(Array.from(data));
     } catch (error) {
       console.error(error);
