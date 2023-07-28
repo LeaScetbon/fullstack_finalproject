@@ -19,7 +19,7 @@ connection.connect((error) => {
 
 module.exports = connection;
 
-/**ב command אחת:
+/**
 Node server.js
-ב command השנייה:
-npm start App.js */
+npm start App.js 
+*/
