@@ -4,13 +4,12 @@ import { useState, useEffect } from 'react';
 
 function MyCart() {
   const [cartProducts, setCartProducts] = useState([]);
+  const userId = JSON.parse(localStorage.getItem('username')).id;
   
   const fetchCartProductsFromServer = async () => {
     try {
-      const userId = JSON.parse(localStorage.getItem('username')).id;
       const response = await fetch(`http://localhost:3001/users/${userId}/mycart`);
       const data = await response.json();
-      console.log(data)
       setCartProducts(Array.from(data));
     } catch (error) {
       console.error(error);
@@ -18,9 +17,9 @@ function MyCart() {
     }
   };
 
-  const handleDeleteProduct = async (productId) => {
+  const handleDeleteProduct = async (productId, userId) => {
     try {
-      const response = await fetch(`http://localhost:3001/users/MyCart/${productId}`, {
+      const response = await fetch(`http://localhost:3001/users/${userId}/MyCart/${productId}`, {
         method: 'DELETE',
       });
       console.log(response)
@@ -53,7 +52,7 @@ function MyCart() {
               src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
             />
-             <button onClick={() => handleDeleteProduct(product.product_id)}>
+             <button onClick={() => handleDeleteProduct(product.product_id, userId)}>
               Delete
             </button>
           </div>
