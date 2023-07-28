@@ -20,7 +20,7 @@ function Home() {
               <Link to={`/products`}>Products</Link>
             </li>
             <li>
-              <Link to={`/users/${user.id}/MyCart`}>My Cart</Link>
+              <Link to={`/users/${user.id}/myCart`}>My Cart</Link>
             </li>
             <li>
               <Link to={`/About`}>About</Link>

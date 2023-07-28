@@ -18,7 +18,7 @@ function App() {
     <Route path="/register" element={<Register />} />
     <Route path="/home" element={<Home/>} />
     <Route path="/products" element={<Products/>} />
-    <Route path="/users/:userId/MyCart" element={<MyCart/>} />
+    <Route path="/users/:userId/myCart" element={<MyCart/>} />
     </Routes>
   </BrowserRouter>
   );

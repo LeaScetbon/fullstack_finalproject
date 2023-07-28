@@ -8,7 +8,7 @@ function MyCart() {
   const fetchCartProductsFromServer = async () => {
     try {
       const userId = JSON.parse(localStorage.getItem('username')).id;
-      const response = await fetch(`http://localhost:3001/users/${userId}/cart`);
+      const response = await fetch(`http://localhost:3001/users/${userId}/mycart`);
       const data = await response.json();
       setCartProducts(Array.from(data));
     } catch (error) {

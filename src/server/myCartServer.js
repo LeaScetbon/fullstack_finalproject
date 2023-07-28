@@ -17,11 +17,11 @@ router.use((req, res, next) => {
 
 
   // Add a product to the user's cart
-router.post('/users/:userId/cart', (req, res) => {
+router.post('/users/:userId/mycart', (req, res) => {
     const { userId } = req.params;
     const { productId } = req.body;
   
-    const query = 'INSERT INTO mycart (user_id, product_id) VALUES (?, ?)';
+    const query = 'INSERT INTO mycart (id, product_id) VALUES (?, ?)';
     connection.query(query, [userId, productId], (error, results) => {
       if (error) {
         console.error('Error executing the query: ', error);
@@ -33,10 +33,10 @@ router.post('/users/:userId/cart', (req, res) => {
   });
   
   // Get the user's cart items
-  router.get('/users/:userId/cart', (req, res) => {
+  router.get('/users/:userId/mycart', (req, res) => {
     const { userId } = req.params;
   
-    const query = 'SELECT products.* FROM mycart JOIN products ON mycart.product_id = products.product_id WHERE user_id = ?';
+    const query = 'SELECT products * FROM mycart JOIN products ON mycart.product_id = products.product_id WHERE id = ?';
     connection.query(query, [userId], (error, results) => {
       if (error) {
         console.error('Error executing the query: ', error);
