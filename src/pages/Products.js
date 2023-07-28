@@ -48,6 +48,7 @@ function Products() {
               src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
             />
+             <h3>{product.price + '$'}</h3>
              <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
