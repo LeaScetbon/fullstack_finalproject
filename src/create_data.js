@@ -39,12 +39,12 @@ con.query(
           // con.query(createRecipeTableQuery, (err, results) => {
           //      if (err) throw err;
           //      console.log("recipe table created successfully");
-          con.query(createCartTableQuery, (err, results) => {
-              if (err) throw err;
-               console.log("mycart table created successfully");
-          //  con.query(insertIntoRecipeQuery, [recipeDataValues], (err, results) => {
+          // con.query(createCartTableQuery, (err, results) => {
           //     if (err) throw err;
-          //     console.log("Recipes data inserted successfully");
+          //      console.log("mycart table created successfully");
+            con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+               if (err) throw err;
+               console.log("Recipes data inserted successfully");
             
                // Close the connection after completing all queries
             con.end(function (err) {
@@ -403,14 +403,14 @@ const productDataValues = ProductsData.map((product) => [
   product.product_picture,
 ]);
 
-// const createRecipeTableQuery = `
-// CREATE TABLE Recipe (
-//   receipt_id INT PRIMARY KEY,
-//   receipt_name VARCHAR(100),
-//   link VARCHAR(255),
-//   receipt_pdf BLOB, -- Binary Large Object to store the PDF data
-//   picture_url VARCHAR(255) -- Text field to store the URL of the picture
-// );`;
+const createRecipeTableQuery = `
+CREATE TABLE Recipe (
+  receipt_id INT PRIMARY KEY,
+  receipt_name VARCHAR(100),
+  link VARCHAR(255),
+  receipt_pdf BLOB, -- Binary Large Object to store the PDF data
+  picture_url VARCHAR(255) -- Text field to store the URL of the picture
+);`;
 
 // const insertIntoRecipeQuery = `
 // INSERT INTO Recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url)
@@ -422,51 +422,51 @@ const productDataValues = ProductsData.map((product) => [
 //     (5, 'Carrot Cake', 'https://www.youtube.com/watch?v=zoyhs-EiJxE', 'carrot_cake_recipe.pdf', 'carrot_cake_picture.jpeg');
 // `;
 
-// const RecipeData = [
-//   {
-//     receipe_id: 1,
-//     receipe_name: "Chocolate Cake Recipe",
-//     link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
-//     receipt_pdf: "chocolate_cake_recipe.pdf",
-//     picture_url: "chocolate_cake_picture.jpeg"
-//   },
-//   {
-//     receipe_id: 2,
-//     receipe_name: "Blueberry Muffins",
-//     link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
-//     receipt_pdf: "blueberry_muffins_recipe.pdf",
-//     picture_url: "blueberry_muffins_picture.jpeg"
-//   },
-//   {
-//     receipe_id: 3,
-//     receipe_name: "Apple Pie",
-//     link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
-//     receipt_pdf: "apple_pie_recipe.pdf",
-//     picture_url: "apple_pie_picture.jpeg"
-//   },
-//   {
-//     receipe_id: 4,
-//     receipe_name: "Banana Bread",
-//     link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
-//     receipt_pdf: "banana_bread_recipe.pdf",
-//     picture_url: "https://www.example.com/banana_bread_picture.jpg"
-//   },
-//   {
-//     receipe_id: 5,
-//     receipe_name: "Carrot Cake",
-//     link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
-//     receipt_pdf: "carrot_cake_recipe.pdf",
-//     picture_url: "carrot_cake_picture.jpeg"
-//   }
-// ];
-
-// const recipeDataValues = RecipeData.map((recipe) => [
-//   recipe.recipe_id,
-//   recipe.recipe_name,
-//   recipe.ink,
-//   recipe.receipt_pdf,
-//   recipe.picture_url,
-// ]);
+const RecipeData = [
+  {
+    receipt_id: 1,
+    receipt_name: "Chocolate Cake Recipe",
+    link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
+    receipt_pdf: "chocolate_cake_recipe.pdf",
+    picture_url: "chocolate_cake_picture.jpeg"
+  },
+  {
+    receipt_id: 2,
+    receipt_name: "Blueberry Muffins",
+    link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
+    receipt_pdf: "blueberry_muffins_recipe.pdf",
+    picture_url: "blueberry_muffins_picture.jpeg"
+  },
+  {
+    receipt_id: 3,
+    receipt_name: "Apple Pie",
+    link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
+    receipt_pdf: "apple_pie_recipe.pdf",
+    picture_url: "apple_pie_picture.jpeg"
+  },
+  {
+    receipt_id: 4,
+    receipt_name: "Banana Bread",
+    link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
+    receipt_pdf: "banana_bread_recipe.pdf",
+    picture_url: "https://www.example.com/banana_bread_picture.jpg"
+  },
+  {
+    receipt_id: 5,
+    receipt_name: "Carrot Cake",
+    link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
+    receipt_pdf: "carrot_cake_recipe.pdf",
+    picture_url: "carrot_cake_picture.jpeg"
+  }
+];
+const insertRecipeQuery = "INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES ?";
+const recipeDataValues = RecipeData.map((recipe) => [
+  recipe.receipt_id,
+  recipe.receipt_name,
+  recipe.link,
+  recipe.receipt_pdf,
+  recipe.picture_url,
+]);
 
 // const createReviewsTableQuery = `
 // CREATE TABLE IF NOT EXISTS reviews (
