@@ -34,7 +34,7 @@ router.get('/login', (req, res) => {
   
   router.get('/users', (req, res) => {
     const { username } = req.query;
-  console.log(username);
+    console.log(username);
     // Execute the query to retrieve user data based on the username
     const query = 'SELECT * FROM users WHERE username = ?';
     connection.query(query, [username], (error, results) => {

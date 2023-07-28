@@ -13,6 +13,7 @@ function Login() {
       let response = await fetch(
         `http://localhost:3001/login?username=${username}`
       );
+      console.log(111);
       console.log(response);
       let data = await response.json();
       console.log(data);

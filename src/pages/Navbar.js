@@ -5,7 +5,8 @@ import { FiLogOut } from "react-icons/fi";
 
 export default function Navbar() {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("username"))
+    // JSON.parse(localStorage.getItem("username"))
+    JSON.parse(localStorage.getItem("username")) || { id: null }
   );
   const handleLogout = () => {
     localStorage.clear();
