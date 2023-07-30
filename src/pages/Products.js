@@ -15,6 +15,7 @@ function Products() {
   });
   const [userType, setUserType] = useState("");
   const [addedProducts, setAddedProducts] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("username")).id;
 
   const fetchProductsFromServer = async () => {
     try {
@@ -27,8 +28,20 @@ function Products() {
     }
   };
 
+  const fetchCartProductsFromServer = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/users/${userId}/MyCart`);
+      const data = await response.json();
+      setAddedProducts(data);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while fetching cart items');
+    }
+  };
+
   useEffect(() => {
     fetchProductsFromServer();
+    fetchCartProductsFromServer();
     const user = JSON.parse(localStorage.getItem("username"));
     if (user && user.usertype) {
       setUserType(user.usertype);
@@ -36,22 +49,26 @@ function Products() {
   }, []);
 
   const handleAddToCart = async (productId) => {
-    try {
-      const userId = JSON.parse(localStorage.getItem("username")).id;
-      await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId }),
-      });
-      alert("Product added to your cart successfully");
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred while adding the product to your cart");
-    }
-  };
+  if (!productId) {
+    alert('Invalid product ID');
+    return;
+  }
 
+  try {
+    await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId }),
+    });
+    alert('Product added to your cart successfully');
+    fetchCartProductsFromServer(); // Update cart items after adding a product
+  } catch (error) {
+    console.error(error);
+    alert('Error adding the product to the cart: ' + error.message);
+  }
+};
   const handleAddProduct = async (event) => {
     event.preventDefault();
     const colorsArray = newProduct.colors
@@ -151,12 +168,12 @@ function Products() {
         {products.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
-            <img src={`product.product_pictur}`} alt={product.product_name} />
-            <h3>{product.price + "$"}</h3>
+            <img src={product.product_picture} alt={product.product_name} />
+            <h3>{product.price + '$'}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
-            {userType === "admin" && (
+            {userType === 'admin' && (
               <button onClick={() => handleDeleteProduct(product.product_id)}>
                 Delete
               </button>
@@ -167,11 +184,11 @@ function Products() {
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             <img src={product.product_picture} alt={product.product_name} />
-            <h3>{product.price + "$"}</h3>
+            <h3>{product.price + '$'}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
-            {userType === "admin" && (
+            {userType === 'admin' && (
               <button onClick={() => handleDeleteProduct(product.product_id)}>
                 Delete
               </button>

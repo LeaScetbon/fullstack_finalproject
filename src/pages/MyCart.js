@@ -1,16 +1,17 @@
-//import React, { useState } from 'react';
-import { Link ,useNavigate} from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 function MyCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const userId = JSON.parse(localStorage.getItem('username')).id;
+
   
+
   const fetchCartProductsFromServer = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/users/${userId}/mycart`);
+      const response = await fetch(`http://localhost:3001/users/${userId}/MyCart`);
       const data = await response.json();
-      setCartProducts(Array.from(data));
+      setCartProducts(data);
     } catch (error) {
       console.error(error);
       alert('An error occurred while fetching cart items');
@@ -22,9 +23,8 @@ function MyCart() {
       const response = await fetch(`http://localhost:3001/users/${userId}/MyCart/${productId}`, {
         method: 'DELETE',
       });
-      console.log(response)
+
       if (response.ok) {
-    
         setCartProducts((prevCartProducts) =>
           prevCartProducts.filter((product) => product.product_id !== productId)
         );
@@ -45,24 +45,27 @@ function MyCart() {
     <div className='my-cart'>
       <h2>My Cart</h2>
       <div className='cart-items'>
-        {cartProducts.map((product) => (
-          <div key={product.product_id} className='cart-item'>
-            <h3>{product.product_name}</h3>
-            <img
-              src={`http://localhost:3001/images/${product.product_picture}`}
-              alt={product.product_name}
-            />
-            <h3>{product.price + '$'}</h3>
-             <button onClick={() => handleDeleteProduct(product.product_id, userId)}>
-              Delete
-            </button>
-          </div>
-        ))}
-        
+        {cartProducts && cartProducts.length > 0 ? (
+          cartProducts.map((product) => (
+            <div key={product.product_id} className='cart-item'>
+              <h3>{product.product_name}</h3>
+              <img
+                src={`http://localhost:3001/images/${product.product_picture}`}
+                alt={product.product_name}
+              />
+              <h3>{product.price + '$'}</h3>
+              <h3>Quantity: {product.quantity}</h3>
+              <button onClick={() => handleDeleteProduct(product.product_id, userId)}>
+                Delete
+              </button>
+            </div>
+          ))
+        ) : (
+          <p>No items in the cart.</p>
+        )}
       </div>
-      <h3>Total Cost: ${cartProducts.reduce((total, product) => total + parseFloat(product.price), 0).toFixed(2)}</h3>
     </div>
   );
-  }
+}
 
-  export default MyCart;
+export default MyCart;
