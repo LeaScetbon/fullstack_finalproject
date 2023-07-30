@@ -52,6 +52,7 @@ function MyCart() {
               src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
             />
+            <h3>{product.price + '$'}</h3>
              <button onClick={() => handleDeleteProduct(product.product_id, userId)}>
               Delete
             </button>
@@ -59,6 +60,7 @@ function MyCart() {
         ))}
         
       </div>
+      <h3>Total Cost: ${cartProducts.reduce((total, product) => total + parseFloat(product.price), 0).toFixed(2)}</h3>
     </div>
   );
   }
