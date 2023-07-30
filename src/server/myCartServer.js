@@ -55,7 +55,7 @@ router.use((req, res, next) => {
     });
   });
   
-  // Get the user's cart items
+  // get the cart of a user
   router.get('/users/:userId/MyCart', (req, res) => {
     const { userId } = req.params;
   
@@ -76,6 +76,7 @@ router.use((req, res, next) => {
     });
   });
   
+  // delete a peoduct from cart
   router.delete('/users/:userId/MyCart/:productId', (req, res) => {
     const { userId, productId } = req.params;
     const query = 'DELETE FROM mycart WHERE id = ? AND product_id = ?';
@@ -89,6 +90,25 @@ router.use((req, res, next) => {
         res.status(404).json({ error: 'Product not found in the cart.' });
       } else {
         res.status(204).send(); 
+      }
+    });
+  });
+
+  // update the quantity
+  router.put('/users/:userId/MyCart/:productId', (req, res) => {
+    const { userId, productId } = req.params;
+    const { quantity } = req.body;
+  
+    const updateQuery = 'UPDATE mycart SET quantity = ? WHERE id = ? AND product_id = ?';
+  
+    connection.query(updateQuery, [quantity, userId, productId], (error, results) => {
+      if (error) {
+        console.error('Error updating the quantity: ', error);
+        res.status(500).json({ error: 'An error occurred while updating the quantity' });
+      } else if (results.affectedRows === 0) {
+        res.status(404).json({ error: 'Product not found in the cart.' });
+      } else {
+        res.status(200).json({ message: 'Product quantity updated in the cart' });
       }
     });
   });

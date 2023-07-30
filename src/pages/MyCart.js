@@ -36,10 +36,34 @@ function MyCart() {
       alert('An error occurred while deleting the product from the cart.');
     }
   };
+  
+  const handleUpdateQuantity = async (productId, quantity) => {
+    try {
+      await fetch(`http://localhost:3001/users/${userId}/MyCart/${productId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity }),
+      });
+      fetchCartProductsFromServer(); 
+    } catch (error) {
+      console.error(error);
+      alert('Error updating the quantity: ' + error.message);
+    }
+  };
 
   useEffect(() => {
     fetchCartProductsFromServer();
   }, []);
+  
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    for (const product of cartProducts) {
+      totalPrice += product.price * product.quantity;
+    }
+    return totalPrice;
+  };
 
   return (
     <div className='my-cart'>
@@ -53,8 +77,18 @@ function MyCart() {
                 src={`http://localhost:3001/images/${product.product_picture}`}
                 alt={product.product_name}
               />
-              <h3>{product.price + '$'}</h3>
-              <h3>Quantity: {product.quantity}</h3>
+              <h3>{product.price*product.quantity.toFixed(2) + '$'}</h3>
+              <div>
+                <h3>Quantity:</h3>
+                <input
+                  type='number'
+                  value={product.quantity}
+                  onChange={(e) =>
+                    handleUpdateQuantity(product.product_id, e.target.value)
+                  }
+                  min='1'
+                />
+              </div>
               <button onClick={() => handleDeleteProduct(product.product_id, userId)}>
                 Delete
               </button>
@@ -64,6 +98,9 @@ function MyCart() {
           <p>No items in the cart.</p>
         )}
       </div>
+      <div className='total-price'>
+          <h3>Total Price: ${getTotalPrice().toFixed(2)}</h3>
+        </div>
     </div>
   );
 }
