@@ -92,20 +92,19 @@ router.post('/Products', (req, res) => {
 
 router.delete('/products/:product_id', (req, res) => {
   const productId = req.params.product_id;
-  const connection = require('./connection.js'); 
-
+  const connection = require('./connection.js');
 
   const deleteQuery = 'DELETE FROM products WHERE product_id = ?';
   connection.query(deleteQuery, [productId], (error, result) => {
     if (error) {
       console.error('Error deleting the product: ', error);
-      res.status(500).json({ error: 'An error occurred while deleting the product' });
+      return res.status(500).json({ error: 'An error occurred while deleting the product' });
+    }
+
+    if (result.affectedRows > 0) {
+      return res.status(200).json({ message: 'Product deleted successfully' });
     } else {
-      if (result.affectedRows > 0) {
-        res.status(200).json({ message: 'Product deleted successfully' });
-      } else {
-        res.status(404).json({ error: 'Product not found' });
-      }
+      return res.status(404).json({ error: 'Product not found' });
     }
   });
 });

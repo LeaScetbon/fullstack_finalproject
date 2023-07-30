@@ -101,24 +101,19 @@ function Products() {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      
-      const response = await fetch(`http://localhost:3001/mycart/product/${productId}`);
-      const contentType = response.headers.get('content-type');
-      
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Invalid response: Not valid JSON');
-      }
+      // Check if the product is referenced in the cart
+      const cartResponse = await fetch(`http://localhost:3001/mycart/product/${productId}`);
+      const cartData = await cartResponse.json();
   
-      const data = await response.json();
-  
-      if (data.length === 0) {
-        
+      if (cartData.length === 0) {
+        // Product is not in the cart, so it can be deleted
         const deleteResponse = await fetch(`http://localhost:3001/products/${productId}`, {
           method: 'DELETE',
         });
   
         if (deleteResponse.ok) {
           alert('Product deleted successfully');
+          // Fetch updated products from the server and update state
           fetchProductsFromServer();
           setAddedProducts((prevAddedProducts) =>
             prevAddedProducts.filter((product) => product.product_id !== productId)
@@ -127,6 +122,7 @@ function Products() {
           alert('Failed to delete product');
         }
       } else {
+        // Product is in the cart, cannot be deleted
         alert('Cannot delete the product as it is referenced in the cart.');
       }
     } catch (error) {
