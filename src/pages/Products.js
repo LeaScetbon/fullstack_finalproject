@@ -151,10 +151,7 @@ function Products() {
         {products.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
-            <img
-              src={`http://localhost:3001/images/${product.product_picture}`}
-              alt={product.product_name}
-            />
+            <img src={`product.product_pictur}`} alt={product.product_name} />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
@@ -169,10 +166,7 @@ function Products() {
         {addedProducts.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
-            <img
-              src={`http://localhost:3001/images/${product.product_picture}`}
-              alt={product.product_name}
-            />
+            <img src={product.product_picture} alt={product.product_name} />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
