@@ -1,8 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    product_name: '',
+    product_picture: '',
+    price: '',
+    brand: '',
+    description: '',
+    colors: '',
+    in_stock: '',
+    weight: '',
+  });
+  const [userType, setUserType] = useState('');
+  const [addedProducts, setAddedProducts] = useState([]);
 
   const fetchProductsFromServer = async () => {
     try {
@@ -11,28 +23,115 @@ function Products() {
       setProducts(Array.from(data));
     } catch (error) {
       console.error(error);
-      alert("An error occurred while fetching products");
+      alert('An error occurred while fetching products');
     }
   };
 
   useEffect(() => {
     fetchProductsFromServer();
+    const user = JSON.parse(localStorage.getItem('username'));
+    if (user && user.usertype) {
+      setUserType(user.usertype);
+    }
   }, []);
 
   const handleAddToCart = async (productId) => {
+    
     try {
-      const userId = JSON.parse(localStorage.getItem("username")).id;
+      const userId = JSON.parse(localStorage.getItem('username')).id;
       await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ productId }),
       });
-      alert("Product added to your cart successfully");
+      alert('Product added to your cart successfully');
     } catch (error) {
       console.error(error);
-      alert("An error occurred while adding the product to your cart");
+      alert('An error occurred while adding the product to your cart');
+    }
+  };
+
+  const handleAddProduct = async (event) => {
+    event.preventDefault();
+    const colorsArray = newProduct.colors.split(",").map((color) => color.trim());
+    newProduct.colors = colorsArray;
+
+    for (const key in newProduct) {
+      if (newProduct.hasOwnProperty(key) && newProduct[key] === '') {
+        alert('Please fill in all the required fields');
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch('http://localhost:3001/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newProduct),
+      });
+
+      if (response.ok) {
+        // Product added successfully
+        alert('Product added successfully');
+
+        setAddedProducts((prevAddedProducts) => [...prevAddedProducts, newProduct]);
+
+        setNewProduct({
+          product_name: '',
+          product_picture: '',
+          price: '',
+          brand: '',
+          description: '',
+          colors: '',
+          in_stock: '',
+          weight: '',
+        });
+      } else {
+        alert('Failed to add product');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while adding the product');
+    }
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      
+      const response = await fetch(`http://localhost:3001/mycart/product/${productId}`);
+      const contentType = response.headers.get('content-type');
+      
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Invalid response: Not valid JSON');
+      }
+  
+      const data = await response.json();
+  
+      if (data.length === 0) {
+        
+        const deleteResponse = await fetch(`http://localhost:3001/products/${productId}`, {
+          method: 'DELETE',
+        });
+  
+        if (deleteResponse.ok) {
+          alert('Product deleted successfully');
+          fetchProductsFromServer();
+          setAddedProducts((prevAddedProducts) =>
+            prevAddedProducts.filter((product) => product.product_id !== productId)
+          );
+        } else {
+          alert('Failed to delete product');
+        }
+      } else {
+        alert('Cannot delete the product as it is referenced in the cart.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while deleting the product');
     }
   };
 
@@ -44,18 +143,40 @@ function Products() {
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             <img
-              src={`pictures/product/${product.product_picture}`}
+              src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
-              width="70%"
             />
-            <h3>{product.price + "$"}</h3>
+            <h3>{product.price + '$'}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
+            {userType === 'admin' && (
+      <button onClick={() => handleDeleteProduct(product.product_id)}>
+        Delete
+      </button>
+       )}
+          </div>
+        ))}
+        {addedProducts.map((product) => (
+          <div key={product.product_id} className="product-item">
+            <h3>{product.product_name}</h3>
+            <img
+              src={`http://localhost:3001/images/${product.product_picture}`}
+              alt={product.product_name}
+            />
+            <h3>{product.price + '$'}</h3>
+            <button onClick={() => handleAddToCart(product.product_id)}>
+              Add to My Cart
+            </button>
+            {userType === 'admin' && (
+      <button onClick={() => handleDeleteProduct(product.product_id)}>
+        Delete
+      </button>
+       )}
           </div>
         ))}
       </div>
-      {userType === "admin" && (
+      {userType === 'admin' && (
         <div className="add-product-form">
           <h3>Add a New Product</h3>
           <form onSubmit={handleAddProduct}>
@@ -73,10 +194,7 @@ function Products() {
               placeholder="Product Picture URL"
               value={newProduct.product_picture}
               onChange={(e) =>
-                setNewProduct({
-                  ...newProduct,
-                  product_picture: e.target.value,
-                })
+                setNewProduct({ ...newProduct, product_picture: e.target.value })
               }
               required
             />

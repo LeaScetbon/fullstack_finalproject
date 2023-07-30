@@ -20,9 +20,9 @@ con.query(
       console.log("Database selected");
 
       // Rest of your code (create users table and insert data) here...
-       con.query(createUsersTableQuery, (err, results) => {
-        if (err) throw err;
-         console.log("user table created successfully");
+       //con.query(createUsersTableQuery, (err, results) => {
+        //if (err) throw err;
+         //console.log("user table created successfully");
 
         // Insert users data into the table
         // con.query(insertUserQuery, [userDataValues], (err, results) => {
@@ -39,12 +39,12 @@ con.query(
           // con.query(createRecipeTableQuery, (err, results) => {
           //      if (err) throw err;
           //      console.log("recipe table created successfully");
-          // con.query(createCartTableQuery, (err, results) => {
-          //     if (err) throw err;
-          //      console.log("mycart table created successfully");
-             con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-                if (err) throw err;
-                console.log("Recipes data inserted successfully");
+           con.query(createCartTableQuery, (err, results) => {
+               if (err) throw err;
+              console.log("mycart table created successfully");
+             //con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+                //if (err) throw err;
+                //console.log("Recipes data inserted successfully");
             
                // Close the connection after completing all queries
             con.end(function (err) {
@@ -52,7 +52,7 @@ con.query(
               console.log("Connection closed");
             });
           });
-        });
+        //});
         //});
       //});
     });
@@ -501,11 +501,13 @@ const recipeDataValues = RecipeData.map((recipe) => [
 //     (9, 5, 'Isaac', 4.7, 'Wonderful carrot cake! Cream cheese frosting is perfect.'),
 //     (10, 5, 'Jane', 4.3, 'Carrot cake is not my favorite, but this recipe was good.');
 // `;
-const createCartTableQuery = 
-`CREATE TABLE IF NOT EXISTS mycart (
+const createCartTableQuery = `
+CREATE TABLE IF NOT EXISTS mycart (
   cart_id INT AUTO_INCREMENT PRIMARY KEY,
   id INT NOT NULL,
   product_id INT NOT NULL,
-  FOREIGN KEY (id) REFERENCES users (id),
-  FOREIGN KEY (product_id) REFERENCES products (product_id)
-);`;
+  quantity INT NOT NULL,
+  FOREIGN KEY (id) REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES products (product_id) ON DELETE CASCADE
+);
+`;
