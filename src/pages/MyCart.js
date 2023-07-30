@@ -5,7 +5,6 @@ function MyCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const userId = JSON.parse(localStorage.getItem('username')).id;
 
-  
 
   const fetchCartProductsFromServer = async () => {
     try {

@@ -76,17 +76,15 @@ router.use((req, res, next) => {
     });
   });
   
-  // delete a peoduct from cart
+  // delete a product from cart
   router.delete('/users/:userId/MyCart/:productId', (req, res) => {
-    const { userId, productId } = req.params;
+    const {userId, productId } = req.params;
     const query = 'DELETE FROM mycart WHERE id = ? AND product_id = ?';
-    
     connection.query(query, [userId, productId], (error, results) => {
       if (error) {
         console.error('Error executing the query: ', error);
         res.status(500).json({ error: 'Internal Server Error' });
       } else if (results.affectedRows === 0) {
-        
         res.status(404).json({ error: 'Product not found in the cart.' });
       } else {
         res.status(204).send(); 
