@@ -3,6 +3,18 @@ import { useEffect, useState } from "react";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({
+    product_name: "",
+    product_picture: "",
+    price: "",
+    brand: "",
+    description: "",
+    colors: "",
+    in_stock: "",
+    weight: "",
+  });
+  const [userType, setUserType] = useState("");
+  const [addedProducts, setAddedProducts] = useState([]);
 
   const fetchProductsFromServer = async () => {
     try {
@@ -17,6 +29,10 @@ function Products() {
 
   useEffect(() => {
     fetchProductsFromServer();
+    const user = JSON.parse(localStorage.getItem("username"));
+    if (user && user.usertype) {
+      setUserType(user.usertype);
+    }
   }, []);
 
   const handleAddToCart = async (productId) => {
@@ -36,6 +52,57 @@ function Products() {
     }
   };
 
+  const handleAddProduct = async (event) => {
+    event.preventDefault();
+    const colorsArray = newProduct.colors
+      .split(",")
+      .map((color) => color.trim());
+    newProduct.colors = colorsArray;
+
+    for (const key in newProduct) {
+      if (newProduct.hasOwnProperty(key) && newProduct[key] === "") {
+        alert("Please fill in all the required fields");
+        return;
+      }
+    }
+
+    try {
+      const response = await fetch("http://localhost:3001/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      });
+
+      if (response.ok) {
+        // Product added successfully
+        alert("Product added successfully");
+
+        setAddedProducts((prevAddedProducts) => [
+          ...prevAddedProducts,
+          newProduct,
+        ]);
+
+        setNewProduct({
+          product_name: "",
+          product_picture: "",
+          price: "",
+          brand: "",
+          description: "",
+          colors: "",
+          in_stock: "",
+          weight: "",
+        });
+      } else {
+        alert("Failed to add product");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while adding the product");
+    }
+  };
+
   return (
     <div className="product">
       <h2>Products</h2>
@@ -44,9 +111,21 @@ function Products() {
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             <img
-              src={`pictures/product/${product.product_picture}`}
+              src={`http://localhost:3001/images/${product.product_picture}`}
               alt={product.product_name}
-              width="70%"
+            />
+            <h3>{product.price + "$"}</h3>
+            <button onClick={() => handleAddToCart(product.product_id)}>
+              Add to My Cart
+            </button>
+          </div>
+        ))}
+        {addedProducts.map((product) => (
+          <div key={product.product_id} className="product-item">
+            <h3>{product.product_name}</h3>
+            <img
+              src={`http://localhost:3001/images/${product.product_picture}`}
+              alt={product.product_name}
             />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>

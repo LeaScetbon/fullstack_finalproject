@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DaphnaAura19",
+  password: "password",
 });
 
 // Create the database
@@ -20,18 +20,18 @@ con.query(
       console.log("Database selected");
 
       // Rest of your code (create users table and insert data) here...
-       con.query(createUsersTableQuery, (err, results) => {
+      con.query(createUsersTableQuery, (err, results) => {
         if (err) throw err;
-         console.log("user table created successfully");
+        console.log("user table created successfully");
 
         // Insert users data into the table
-         con.query(insertUserQuery, [userDataValues], (err, results) => {
-           if (err) throw err;
-           console.log("Users data inserted successfully");
-        // con.query(createProductsTableQuery, (err, results) => {
-        //   if (err) throw err;
-        //   console.log("product table created successfully");
-        
+        con.query(insertUserQuery, [userDataValues], (err, results) => {
+          if (err) throw err;
+          console.log("Users data inserted successfully");
+          // con.query(createProductsTableQuery, (err, results) => {
+          //   if (err) throw err;
+          //   console.log("product table created successfully");
+
           // Insert products data into the table
           // con.query(insertProductQuery, [productDataValues], (err, results) => {
           //   if (err) throw err;
@@ -42,18 +42,18 @@ con.query(
           // con.query(createCartTableQuery, (err, results) => {
           //     if (err) throw err;
           //      console.log("mycart table created successfully");
-            // con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-            //    if (err) throw err;
-            //    console.log("Recipes data inserted successfully");
-            
-               // Close the connection after completing all queries
-            con.end(function (err) {
-              if (err) throw err;
-              console.log("Connection closed");
-            });
+          // con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+          //    if (err) throw err;
+          //    console.log("Recipes data inserted successfully");
+
+          // Close the connection after completing all queries
+          con.end(function (err) {
+            if (err) throw err;
+            console.log("Connection closed");
           });
         });
-        //});
+      });
+      //});
       //});
     });
   }
@@ -229,7 +229,8 @@ const ProductsData = [
     colors: ["Red"],
     in_stock: true,
     weight: 150,
-    product_picture: "baking_mat.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbaking_mat.jpeg?alt=media&token=5e1f1086-c546-42b4-b575-e0e12dd3a19b",
     reviews: [],
   },
   {
@@ -242,7 +243,8 @@ const ProductsData = [
     colors: ["Silver"],
     in_stock: true,
     weight: 800,
-    product_picture: "mixing_bowls.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbaking_pan.jpeg?alt=media&token=e2c60d8a-137f-42ff-b3ba-d47e2e8acf05g",
     reviews: [
       {
         user: "baker123",
@@ -396,7 +398,8 @@ const ProductsData = [
   },
 ];
 
-const insertProductQuery = "INSERT INTO products (product_id, product_name, brand, price, description, colors, in_stock, weight, product_picture) VALUES ?";
+const insertProductQuery =
+  "INSERT INTO products (product_id, product_name, brand, price, description, colors, in_stock, weight, product_picture) VALUES ?";
 
 const productDataValues = ProductsData.map((product) => [
   product.product_id,
@@ -435,38 +438,39 @@ const RecipeData = [
     receipt_name: "Chocolate Cake Recipe",
     link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
     receipt_pdf: "chocolate_cake_recipe.pdf",
-    picture_url: "chocolate_cake_picture.jpeg"
+    picture_url: "chocolate_cake_picture.jpeg",
   },
   {
     receipt_id: 2,
     receipt_name: "Blueberry Muffins",
     link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
     receipt_pdf: "blueberry_muffins_recipe.pdf",
-    picture_url: "blueberry_muffins_picture.jpeg"
+    picture_url: "blueberry_muffins_picture.jpeg",
   },
   {
     receipt_id: 3,
     receipt_name: "Apple Pie",
     link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
     receipt_pdf: "apple_pie_recipe.pdf",
-    picture_url: "apple_pie_picture.jpeg"
+    picture_url: "apple_pie_picture.jpeg",
   },
   {
     receipt_id: 4,
     receipt_name: "Banana Bread",
     link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
     receipt_pdf: "banana_bread_recipe.pdf",
-    picture_url: "https://www.example.com/banana_bread_picture.jpg"
+    picture_url: "https://www.example.com/banana_bread_picture.jpg",
   },
   {
     receipt_id: 5,
     receipt_name: "Carrot Cake",
     link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
     receipt_pdf: "carrot_cake_recipe.pdf",
-    picture_url: "carrot_cake_picture.jpeg"
-  }
+    picture_url: "carrot_cake_picture.jpeg",
+  },
 ];
-const insertRecipeQuery = "INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES ?";
+const insertRecipeQuery =
+  "INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES ?";
 const recipeDataValues = RecipeData.map((recipe) => [
   recipe.receipt_id,
   recipe.receipt_name,
@@ -485,8 +489,6 @@ const recipeDataValues = RecipeData.map((recipe) => [
 //   FOREIGN KEY (recipe_id) REFERENCES Recipe (receipt_id) ON DELETE CASCADE
 // );`;
 
-
-
 // const insertIntoReviewsQuery = `
 // INSERT INTO reviews (review_id, recipe_id, user, rating, comment)
 // VALUES
@@ -501,8 +503,7 @@ const recipeDataValues = RecipeData.map((recipe) => [
 //     (9, 5, 'Isaac', 4.7, 'Wonderful carrot cake! Cream cheese frosting is perfect.'),
 //     (10, 5, 'Jane', 4.3, 'Carrot cake is not my favorite, but this recipe was good.');
 // `;
-const createCartTableQuery = 
-`CREATE TABLE IF NOT EXISTS mycart (
+const createCartTableQuery = `CREATE TABLE IF NOT EXISTS mycart (
   cart_id INT AUTO_INCREMENT PRIMARY KEY,
   id INT NOT NULL,
   product_id INT NOT NULL,

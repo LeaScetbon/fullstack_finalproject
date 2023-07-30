@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { FiLogOut } from "react-icons/fi";
-
+import thePinkBImage from "../assets/the_pink_b.png";
 export default function Navbar() {
   const [user, setUser] = useState(
     // JSON.parse(localStorage.getItem("username"))
@@ -15,6 +15,13 @@ export default function Navbar() {
   let navigate = useNavigate();
   return (
     <nav className="nav">
+      <div className="logo">
+        <img
+          src={thePinkBImage}
+          alt="The Pink B"
+          style={{ width: "30%", height: "flex" }}
+        />{" "}
+      </div>
       <Link to="/" className="site-title">
         The Pink Bakery.
       </Link>

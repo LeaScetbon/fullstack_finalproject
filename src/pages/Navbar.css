@@ -27,9 +27,9 @@
   
   .site-title {
     font-size: 2rem;
-    
-    
+    text-align: left;
   }
+  
   
   .nav ul {
     padding: 0;
@@ -54,7 +54,7 @@
   }
   
   .nav li:hover {
-    background-color: #a5c611;
+    background-color: #c6118a;
     
   }
 
@@ -68,3 +68,4 @@
     height: 100%
     
 }
+
