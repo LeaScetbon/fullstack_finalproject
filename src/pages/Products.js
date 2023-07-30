@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 function Products() {
   const [products, setProducts] = useState([]);
 
-  //const userId = JSON.parse(localStorage.getItem("username")).id;
   const fetchProductsFromServer = async () => {
     try {
       const response = await fetch(`http://localhost:3001/products`);
@@ -56,6 +55,90 @@ function Products() {
           </div>
         ))}
       </div>
+      {userType === "admin" && (
+        <div className="add-product-form">
+          <h3>Add a New Product</h3>
+          <form onSubmit={handleAddProduct}>
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={newProduct.product_name}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, product_name: e.target.value })
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Product Picture URL"
+              value={newProduct.product_picture}
+              onChange={(e) =>
+                setNewProduct({
+                  ...newProduct,
+                  product_picture: e.target.value,
+                })
+              }
+              required
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, price: e.target.value })
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Brand"
+              value={newProduct.brand}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, brand: e.target.value })
+              }
+              required
+            />
+            <textarea
+              placeholder="Description"
+              value={newProduct.description}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, description: e.target.value })
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Colors"
+              value={newProduct.colors}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, colors: e.target.value })
+              }
+              required
+            />
+            <label>
+              In Stock:
+              <input
+                type="checkbox"
+                checked={newProduct.in_stock}
+                onChange={(e) =>
+                  setNewProduct({ ...newProduct, in_stock: e.target.checked })
+                }
+                required
+              />
+            </label>
+            <input
+              type="number"
+              placeholder="Weight"
+              value={newProduct.weight}
+              onChange={(e) =>
+                setNewProduct({ ...newProduct, weight: e.target.value })
+              }
+              required
+            />
+            <button type="submit">Add Product</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

@@ -31,7 +31,47 @@ router.get('/Recipies', (req, res) => {
 
   });
 
+  router.post('/Recipies', (req, res) => {
+    const {
+      receipt_name,
+      link,
+      receipt_pdf,
+      picture_url
+
+    } = req.body;
   
+    if (
+      !receipt_name ||
+      !link ||
+      !receipt_pdf ||
+      !picture_url
+    ) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+  
+    const recipeId = Math.floor(Math.random() * 100000);
+  
+    
+    connection.query(
+      'INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES (?, ?, ?, ?, ?)',
+      [recipeId, receipt_name, link, receipt_pdf, picture_url],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'An error occurred while adding the recipe' });
+        }
+  
+        const newRecipie = {
+          receipt_id: recipeId,
+          receipt_name,
+          link,
+          receipt_pdf,
+          picture_url
+        };
+        res.status(201).json(newRecipie);
+      }
+    );
+  });
   
 
   
