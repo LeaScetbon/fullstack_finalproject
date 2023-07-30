@@ -103,6 +103,45 @@ function Products() {
     }
   };
 
+  const handleDeleteProduct = async (productId) => {
+    try {
+      // Check if the product is referenced in the cart
+      const cartResponse = await fetch(
+        `http://localhost:3001/mycart/product/${productId}`
+      );
+      const cartData = await cartResponse.json();
+
+      if (cartData.length === 0) {
+        // Product is not in the cart, so it can be deleted
+        const deleteResponse = await fetch(
+          `http://localhost:3001/products/${productId}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (deleteResponse.ok) {
+          alert("Product deleted successfully");
+          // Fetch updated products from the server and update state
+          fetchProductsFromServer();
+          setAddedProducts((prevAddedProducts) =>
+            prevAddedProducts.filter(
+              (product) => product.product_id !== productId
+            )
+          );
+        } else {
+          alert("Failed to delete product");
+        }
+      } else {
+        // Product is in the cart, cannot be deleted
+        alert("Cannot delete the product as it is referenced in the cart.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while deleting the product");
+    }
+  };
+
   return (
     <div className="product">
       <h2>Products</h2>
@@ -118,6 +157,11 @@ function Products() {
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
+            {userType === "admin" && (
+              <button onClick={() => handleDeleteProduct(product.product_id)}>
+                Delete
+              </button>
+            )}
           </div>
         ))}
         {addedProducts.map((product) => (
@@ -131,6 +175,11 @@ function Products() {
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
+            {userType === "admin" && (
+              <button onClick={() => handleDeleteProduct(product.product_id)}>
+                Delete
+              </button>
+            )}
           </div>
         ))}
       </div>
