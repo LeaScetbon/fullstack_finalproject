@@ -40,9 +40,9 @@ con.query(
           // con.query(createRecipeTableQuery, (err, results) => {
           //      if (err) throw err;
           //      console.log("recipe table created successfully");
-          //con.query(createCartTableQuery, (err, results) => {
-          //  if (err) throw err;
-          // console.log("mycart table created successfully");
+          con.query(createCartTableQuery, (err, results) => {
+            if (err) throw err;
+           console.log("mycart table created successfully");
           //con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
           //if (err) throw err;
           //console.log("Recipes data inserted successfully");
@@ -54,7 +54,7 @@ con.query(
           });
         });
       });
-      //});
+      });
       //});
     });
   }
@@ -63,7 +63,7 @@ con.query(
 // create users table
 const createUsersTableQuery = `
 CREATE TABLE IF NOT EXISTS users (
-  id INT PRIMARY KEY,
+  id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   usertype VARCHAR(255) NOT NULL,
@@ -72,76 +72,76 @@ CREATE TABLE IF NOT EXISTS users (
 `;
 
 const usersData = [
-  // {
-  //   id: 1,
-  //   username: "Lea",
-  //   email: "lea@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 1234,
-  // },
-  // {
-  //   id: 2,
-  //   username: "Jane Smith",
-  //   email: "jane.smith@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 56,
-  // },
-  // {
-  //   id: 3,
-  //   username: "Michael Johnson",
-  //   email: "michael.johnson@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 7,
-  // },
-  // {
-  //   id: 4,
-  //   username: "Emily Brown",
-  //   email: "emily.brown@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 8,
-  // },
-  // {
-  //   id: 5,
-  //   username: "William Lee",
-  //   email: "william.lee@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 9,
-  // },
-  // {
-  //   id: 6,
-  //   username: "Sophia Martinez",
-  //   email: "sophia.martinez@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 111,
-  // },
-  // {
-  //   id: 7,
-  //   username: "Oliver Wilson",
-  //   email: "oliver.wilson@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 756,
-  // },
-  // {
-  //   id: 8,
-  //   username: "Ava Johnson",
-  //   email: "ava.johnson@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 25,
-  // },
-  // {
-  //   id: 9,
-  //   username: "Ethan Taylor",
-  //   email: "ethan.taylor@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 482,
-  // },
-  // {
-  //   id: 10,
-  //   username: "Isabella Anderson",
-  //   email: "isabella.anderson@gmail.com",
-  //   usertype: "client",
-  //   userpassword: 9876,
-  // },
+  {
+    id: 1,
+    username: "Lea",
+    email: "lea@gmail.com",
+    usertype: "client",
+    userpassword: 1234,
+  },
+  {
+    id: 2,
+    username: "Jane Smith",
+    email: "jane.smith@gmail.com",
+    usertype: "client",
+    userpassword: 56,
+  },
+  {
+    id: 3,
+    username: "Michael Johnson",
+    email: "michael.johnson@gmail.com",
+    usertype: "client",
+    userpassword: 7,
+  },
+  {
+    id: 4,
+    username: "Emily Brown",
+    email: "emily.brown@gmail.com",
+    usertype: "client",
+    userpassword: 8,
+  },
+  {
+    id: 5,
+    username: "William Lee",
+    email: "william.lee@gmail.com",
+    usertype: "client",
+    userpassword: 9,
+  },
+  {
+    id: 6,
+    username: "Sophia Martinez",
+    email: "sophia.martinez@gmail.com",
+    usertype: "client",
+    userpassword: 111,
+  },
+  {
+    id: 7,
+    username: "Oliver Wilson",
+    email: "oliver.wilson@gmail.com",
+    usertype: "client",
+    userpassword: 756,
+  },
+  {
+    id: 8,
+    username: "Ava Johnson",
+    email: "ava.johnson@gmail.com",
+    usertype: "client",
+    userpassword: 25,
+  },
+  {
+    id: 9,
+    username: "Ethan Taylor",
+    email: "ethan.taylor@gmail.com",
+    usertype: "client",
+    userpassword: 482,
+  },
+  {
+    id: 10,
+    username: "Isabella Anderson",
+    email: "isabella.anderson@gmail.com",
+    usertype: "client",
+    userpassword: 9876,
+  },
   {
     id: 11,
     username: "Nov",
