@@ -1,0 +1,52 @@
+.recipies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+  }
+  
+  .recipies-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .recipe-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .recipe-item h3 {
+    margin-bottom: 10px;
+  }
+  
+  .recipe-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .add-recipe-form {
+    margin-top: 40px;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+  
+  .add-recipe-form input,
+  .add-recipe-form button {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .add-recipe-form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .add-recipe-form button:hover {
+    background-color: #0056b3;
+  }
+  
