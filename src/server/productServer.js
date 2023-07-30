@@ -4,17 +4,8 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 // const crypto = require('crypto');
 
-
-
 const router = express.Router();
 
-// router.use(cors());
-
-// const corsOptions = {
-//   origin: "http://localhost:3001", 
-// };
-
-// router.use(cors(corsOptions));
 
 router.use(bodyParser.json())
 
@@ -44,9 +35,7 @@ router.get('/Products', (req, res) => {
 
   });
 
-//router.use(bodyParser.json());
 
-// POST request to add a product
 router.post('/Products', (req, res) => {
   const {
     product_name,
