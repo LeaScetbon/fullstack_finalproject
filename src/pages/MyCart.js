@@ -6,7 +6,7 @@ function MyCart() {
   const userId = JSON.parse(localStorage.getItem('username')).id;
 
 
-  const fetchCartProductsFromServer = async () => {
+  const fetchCartProductsFromServer = async (userId) => {
     try {
       const response = await fetch(`http://localhost:3001/users/${userId}/MyCart`);
       const data = await response.json();
