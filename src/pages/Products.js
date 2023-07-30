@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import React from "react";
+import "./Products.css";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -151,7 +153,9 @@ function Products() {
         {products.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
-            <img src={`product.product_pictur}`} alt={product.product_name} />
+            {console.log("Product Picture URL:", product.product_picture)}{" "}
+            {/* Add this line */}
+            <img src={product.product_picture} alt={product.product_name} />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
