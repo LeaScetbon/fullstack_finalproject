@@ -32,12 +32,21 @@ function Products() {
 
   const fetchCartProductsFromServer = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/users/${userId}/MyCart`);
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/MyCart`
+      );
       const data = await response.json();
-      setAddedProducts(data);
+
+      if (Array.isArray(data)) {
+        // Make sure data is an array, and then set the addedProducts state
+        setAddedProducts(data);
+      } else {
+        console.error("Invalid data format for cart products:", data);
+        setAddedProducts([]); // Reset to empty array to handle the error case
+      }
     } catch (error) {
       console.error(error);
-      alert('An error occurred while fetching cart items');
+      alert("An error occurred while fetching cart items");
     }
   };
 
@@ -51,26 +60,26 @@ function Products() {
   }, []);
 
   const handleAddToCart = async (productId) => {
-  if (!productId) {
-    alert('Invalid product ID');
-    return;
-  }
+    if (!productId) {
+      alert("Invalid product ID");
+      return;
+    }
 
-  try {
-    await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId }),
-    });
-    alert('Product added to your cart successfully');
-    fetchCartProductsFromServer(); // Update cart items after adding a product
-  } catch (error) {
-    console.error(error);
-    alert('Error adding the product to the cart: ' + error.message);
-  }
-};
+    try {
+      await fetch(`http://localhost:3001/users/${userId}/MyCart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      });
+      alert("Product added to your cart successfully");
+      fetchCartProductsFromServer(); // Update cart items after adding a product
+    } catch (error) {
+      console.error(error);
+      alert("Error adding the product to the cart: " + error.message);
+    }
+  };
   const handleAddProduct = async (event) => {
     event.preventDefault();
     const colorsArray = newProduct.colors
@@ -177,7 +186,7 @@ function Products() {
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
-            {userType === 'admin' && (
+            {userType === "admin" && (
               <button onClick={() => handleDeleteProduct(product.product_id)}>
                 Delete
               </button>
@@ -188,11 +197,11 @@ function Products() {
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             <img src={product.product_picture} alt={product.product_name} />
-            <h3>{product.price + '$'}</h3>
+            <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
             </button>
-            {userType === 'admin' && (
+            {userType === "admin" && (
               <button onClick={() => handleDeleteProduct(product.product_id)}>
                 Delete
               </button>

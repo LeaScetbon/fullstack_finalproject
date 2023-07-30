@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DaphnaAura19",
+  password: "password",
 });
 
 // Create the database
@@ -20,41 +20,44 @@ con.query(
       console.log("Database selected");
 
       // Rest of your code (create users table and insert data) here...
-      con.query(createUsersTableQuery, (err, results) => {
+      // con.query(createUsersTableQuery, (err, results) => {
+      //  if (err) throw err;
+      //  console.log("user table created successfully");
+
+      // Insert users data into the table
+      // con.query(insertUserQuery, [userDataValues], (err, results) => {
+      //   if (err) throw err;
+      //  console.log("Users data inserted successfully");
+
+      // con.query(createProductsTableQuery, (err, results) => {
+      //   if (err) throw err;
+      //   console.log("product table created successfully");
+
+      // Insert products data into the table
+      //con.query(insertProductQuery, [productDataValues], (err, results) => {
+      //if (err) throw err;
+      //console.log("Products data inserted successfully");
+      // con.query(createRecipeTableQuery, (err, results) => {
+      //      if (err) throw err;
+      //      console.log("recipe table created successfully");
+
+      con.query(createCartTableQuery, (err, results) => {
         if (err) throw err;
-        console.log("user table created successfully");
+        console.log("mycart table created successfully");
 
-        // Insert users data into the table
-        con.query(insertUserQuery, [userDataValues], (err, results) => {
+        //con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+        //if (err) throw err;
+        //console.log("Recipes data inserted successfully");
+
+        // Close the connection after completing all queries
+        con.end(function (err) {
           if (err) throw err;
-          console.log("Users data inserted successfully");
-
-          // con.query(createProductsTableQuery, (err, results) => {
-          //   if (err) throw err;
-          //   console.log("product table created successfully");
-
-          // Insert products data into the table
-          //con.query(insertProductQuery, [productDataValues], (err, results) => {
-          //if (err) throw err;
-          //console.log("Products data inserted successfully");
-          // con.query(createRecipeTableQuery, (err, results) => {
-          //      if (err) throw err;
-          //      console.log("recipe table created successfully");
-          con.query(createCartTableQuery, (err, results) => {
-            if (err) throw err;
-           console.log("mycart table created successfully");
-          //con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-          //if (err) throw err;
-          //console.log("Recipes data inserted successfully");
-
-          // Close the connection after completing all queries
-          con.end(function (err) {
-            if (err) throw err;
-            console.log("Connection closed");
-          });
-        });
+          console.log("Connection closed");
+        //});
+        //  });
       });
       });
+      //});
       //});
     });
   }
