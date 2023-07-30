@@ -36,7 +36,7 @@ function Products() {
         `http://localhost:3001/users/${userId}/MyCart`
       );
       const data = await response.json();
-
+      
       if (Array.isArray(data)) {
         // Make sure data is an array, and then set the addedProducts state
         setAddedProducts(data);
@@ -73,6 +73,7 @@ function Products() {
         },
         body: JSON.stringify({ productId }),
       });
+
       alert("Product added to your cart successfully");
       fetchCartProductsFromServer(); // Update cart items after adding a product
     } catch (error) {
@@ -80,6 +81,7 @@ function Products() {
       alert("Error adding the product to the cart: " + error.message);
     }
   };
+  
   const handleAddProduct = async (event) => {
     event.preventDefault();
     const colorsArray = newProduct.colors
