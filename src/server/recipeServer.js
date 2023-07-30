@@ -73,6 +73,24 @@ router.get('/Recipies', (req, res) => {
     );
   });
   
-
+  router.delete('/recipes/:receipt_id', (req, res) => {
+    const receiptId = req.params.receipt_id;
+    const connection = require('./connection.js'); 
+  
+  
+    const deleteQuery = 'DELETE FROM recipe WHERE receipt_id = ?';
+    connection.query(deleteQuery, [receiptId], (error, result) => {
+      if (error) {
+        console.error('Error deleting the recipe: ', error);
+        res.status(500).json({ error: 'An error occurred while deleting the recipe' });
+      } else {
+        if (result.affectedRows > 0) {
+          res.sendStatus(200);
+        } else {
+          res.status(404).json({ error: 'Recipe not found' });
+        }
+      }
+    });
+  });
   
 module.exports = router;

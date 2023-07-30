@@ -25,9 +25,9 @@ con.query(
          console.log("user table created successfully");
 
         // Insert users data into the table
-         con.query(insertUserQuery, [userDataValues], (err, results) => {
-           if (err) throw err;
-           console.log("Users data inserted successfully");
+        // con.query(insertUserQuery, [userDataValues], (err, results) => {
+          // if (err) throw err;
+           //console.log("Users data inserted successfully");
         // con.query(createProductsTableQuery, (err, results) => {
         //   if (err) throw err;
         //   console.log("product table created successfully");
@@ -42,9 +42,9 @@ con.query(
           // con.query(createCartTableQuery, (err, results) => {
           //     if (err) throw err;
           //      console.log("mycart table created successfully");
-            // con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-            //    if (err) throw err;
-            //    console.log("Recipes data inserted successfully");
+             con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+                if (err) throw err;
+                console.log("Recipes data inserted successfully");
             
                // Close the connection after completing all queries
             con.end(function (err) {

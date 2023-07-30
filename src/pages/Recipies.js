@@ -75,6 +75,27 @@ function Recipies() {
     }
   };
 
+  const handleDeleteRecipe = async (receiptId) => {
+    try {
+      const response = await fetch(`http://localhost:3001/recipes/${receiptId}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        alert('Recipe deleted successfully');
+        fetchRecipiesFromServer();
+        setAddedRecipies((prevAddedRecipies) =>
+          prevAddedRecipies.filter((recipe) => recipe.receipt_id !== receiptId)
+        );
+      } else {
+        alert('Failed to delete recipe');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while deleting the recipe');
+    }
+  };
+
   return (
     <div className='recipies'>
       <h2>Recipies</h2>
@@ -86,6 +107,11 @@ function Recipies() {
               src={`http://localhost:3001/images/${recipe.picture_url}`}
               alt={recipe.receipt_name}
             />
+            {userType === 'admin' && (
+      <button onClick={() => handleDeleteRecipe(recipe.receipt_id)}>
+        Delete
+      </button>
+       )}
           </div>
         ))}
       </div>
@@ -96,7 +122,13 @@ function Recipies() {
             src={`http://localhost:3001/images/${recipe.picture_url}`}
             alt={recipe.receipt_name}
           />
+          {userType === 'admin' && (
+      <button onClick={() => handleDeleteRecipe(recipe.receipt_id)}>
+        Delete
+      </button>
+    )}
         </div>
+
       ))}
       {userType === 'admin' && (
         <div className="add-recipe-form">
