@@ -10,7 +10,7 @@ import MyCart from "./pages/MyCart";
 import Recipies from "./pages/Recipies";
 import "./App.css";
 import Navbar from "./pages/Navbar";
-
+import About from "./pages/About";
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/users/:userId/MyCart" element={<MyCart />} />
           <Route path="/Recipies" element={<Recipies />} />
+          <Route path="/About" element={<About />} />
         </Routes>
       </div>
     </>

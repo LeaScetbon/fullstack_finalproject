@@ -1,3 +1,10 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+/* Assuming "site-title" class is already styled */
+.site-title span {
+  color: #c6118a;
+}
+
 * {
     box-sizing: border-box;
     font-family:Verdana, Geneva, Tahoma, sans-serif;

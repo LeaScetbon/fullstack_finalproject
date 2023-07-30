@@ -15,16 +15,21 @@ export default function Navbar() {
   let navigate = useNavigate();
   return (
     <nav className="nav">
-      <div className="logo">
-        <img
-          src={thePinkBImage}
-          alt="The Pink B"
-          style={{ width: "30%", height: "flex" }}
-        />{" "}
-      </div>
+      {
+        // <div className="logo">
+        //   <img
+        //     src={thePinkBImage}
+        //     alt="The Pink B"
+        //     style={{ width: "30%", height: "flex" }}
+        //   />{" "}
+        // </div>
+      }
       <Link to="/" className="site-title">
-        The Pink Bakery.
+        The Pink Bakery<span>.</span>
       </Link>
+
+      {/* <label htmlFor="toggler" className="fas-fa-shopping-cart"></label> */}
+
       <ul>
         <li>
           <CustomLink to="/Recipies">Recipies</CustomLink>
@@ -38,7 +43,9 @@ export default function Navbar() {
         <li>
           <CustomLink to="/About">About</CustomLink>
         </li>
-
+        <li>
+          <CustomLink to="/Home">Home</CustomLink>
+        </li>
         <li isActive="false">
           <button className="logout" onClick={handleLogout}>
             <FiLogOut className="logout-icon" />

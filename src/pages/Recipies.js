@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Recipies.css";
+
 function Recipies() {
   const [recipies, setRecipies] = useState([]);
   const [newRecipie, setNewRecipie] = useState({
@@ -104,10 +105,8 @@ function Recipies() {
         {recipies.map((recipe) => (
           <div key={recipe.receipt_id} className="recipe-item">
             <h3>{recipe.receipt_name}</h3>
-            <img
-              src={`http://localhost:3001/images/${recipe.picture_url}`}
-              alt={recipe.receipt_name}
-            />
+            <img src={recipe.picture_url} alt={recipe.receipt_name} />
+            {console.log("recipe Picture URL:", recipe.picture_url)}{" "}
             {userType === "admin" && (
               <button onClick={() => handleDeleteRecipe(recipe.receipt_id)}>
                 Delete
@@ -119,10 +118,7 @@ function Recipies() {
       {addedRecipies.map((recipe) => (
         <div key={recipe.receipt_id} className="recipe-item">
           <h3>{recipe.receipt_name}</h3>
-          <img
-            src={`http://localhost:3001/images/${recipe.picture_url}`}
-            alt={recipe.receipt_name}
-          />
+          <img src={recipe.picture_url} alt={recipe.receipt_name} />
           {userType === "admin" && (
             <button onClick={() => handleDeleteRecipe(recipe.receipt_id)}>
               Delete
@@ -177,4 +173,5 @@ function Recipies() {
     </div>
   );
 }
+
 export default Recipies;

@@ -1,0 +1,72 @@
+.home{
+    display: flex;
+    align-items: center;
+    min-height: 20vh;
+    background: url(../assets/Preview.jpeg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    max-height: 400px;
+}
+.home .contant{
+    max-width: 40rem ;
+   text-align: center;
+ 
+    
+}
+.home .contant h3{
+    font-size: 6rem;
+    color: #333;
+}
+.home .contant span{
+    font-size: 3.5rem;
+    color: var(--pink);
+    padding:  1rem  0;
+    line-height: 1.5;
+}
+.about .row{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    padding-bottom: 3rem;
+}
+.about .row .video-container{
+   flex: 1 1 40rem;
+   position: relative; 
+}
+.about .row .video-container video{
+    width: 45%;
+    border: 1.5rem solid #fff;
+    border-radius: 5rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    height: 45%;
+    object-fit: cover;
+}
+.about .row .video-container h3{
+    position: absolute;
+    top: 50%;
+    right: 62%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    background: #fff;
+    padding: 1rem 2rem;
+    text-align: center;
+    mix-blend-mode: screen;
+}
+.about .row .contant{
+    flex: 1 1 40rem;
+}
+.about .row .contant h3{
+    font-size: 3rem;
+    color: #333;
+}
+.about .row .contant p{
+    font-size:1.5rem;
+    color: #999;
+    padding: 1rem;
+    line-height: 1.5;
+}
+.heading span{
+    color: var(--pink);
+}
