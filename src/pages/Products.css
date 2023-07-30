@@ -1,0 +1,16 @@
+/* Add this CSS to your existing styles or create a new CSS file */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust the column width as needed */
+    grid-gap: 20px; /* Add a gap between grid items */
+  }
+  
+  .product-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Adjust other styles as needed */
+  
