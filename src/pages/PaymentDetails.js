@@ -12,7 +12,17 @@ function PaymentDetails() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  let updatedValue = value;
+
+  if (name === 'cardNumber') {
+    // Remove any white spaces from the cardNumber field
+    updatedValue = parseInt(value);
+  } else if (name === 'cvv') {
+    // Parse the cvv field as an integer
+    updatedValue = parseInt(value);
+  }
+
+  setFormData({ ...formData, [name]: updatedValue });
   };
 
   const handleSubmit = async (e) => {
@@ -23,14 +33,12 @@ function PaymentDetails() {
         alert('User ID not found in local storage');
         return;
       }
-  
-      // Convert cardNumber to a number before sending to the server
+
       const updatedFormData = {
         ...formData,
-        cardNumber: Number(formData.cardNumber),
         username: JSON.parse(localStorage.getItem('username')).username,
       };
-  
+
       const response = await fetch(`http://localhost:3001/users/${userId}/MyCart/PaymentDetails`, {
         method: 'POST',
         headers: {
@@ -38,7 +46,7 @@ function PaymentDetails() {
         },
         body: JSON.stringify(updatedFormData),
       });
-  
+
       const data = await response.json();
       console.log(data);
       // Assuming the response from the server contains a "message" field for successful payment
@@ -53,7 +61,6 @@ function PaymentDetails() {
       alert('An error occurred while processing the payment');
     }
   };
-  
 
   return (
     <div>
@@ -85,11 +92,12 @@ function PaymentDetails() {
         <div>
           <label htmlFor="expirationDate">Expiration Date:</label>
           <input
-            type="date"
+            type="text"
             id="expirationDate"
             name="expirationDate"
             value={formData.expirationDate}
             onChange={handleChange}
+            
             required
           />
         </div>
@@ -111,6 +119,8 @@ function PaymentDetails() {
 }
 
 export default PaymentDetails;
+
+
 
 
 

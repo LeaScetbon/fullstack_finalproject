@@ -37,24 +37,24 @@ con.query(
       //con.query(insertProductQuery, [productDataValues], (err, results) => {
       //if (err) throw err;
       //console.log("Products data inserted successfully");
-      // con.query(createRecipeTableQuery, (err, results) => {
-      //      if (err) throw err;
-      //      console.log("recipe table created successfully");
+       con.query(createRecipeTableQuery, (err, results) => {
+            if (err) throw err;
+            console.log("recipe table created successfully");
 
       con.query(createCartTableQuery, (err, results) => {
         if (err) throw err;
         console.log("mycart table created successfully");
 
-        //con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-        //if (err) throw err;
-        //console.log("Recipes data inserted successfully");
+        con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
+        if (err) throw err;
+        console.log("Recipes data inserted successfully");
 
         // Close the connection after completing all queries
         con.end(function (err) {
           if (err) throw err;
           console.log("Connection closed");
-        //});
-        //  });
+        });
+          });
       });
       });
       });
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS users (
   usertype VARCHAR(255) NOT NULL,
   userpassword INT NOT NULL, 
   card_number BIGINT(16) NOT NULL,
-  expiration_date DATE NOT NULL,
+  expiration_date VARCHAR(255) NOT NULL,
   cvv INT(3) NOT NULL
 );
 `;

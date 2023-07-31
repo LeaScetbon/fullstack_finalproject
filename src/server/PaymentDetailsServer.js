@@ -18,6 +18,9 @@ router.use((req, res, next) => {
 router.post('/users/:userId/MyCart/PaymentDetails', async (req, res) => {
   const { username, cardNumber, expirationDate, cvv } = req.body;
 
+  
+  console.log('Received form data:', req.body);
+
   if (!username || !cardNumber || !expirationDate || !cvv) {
     return res.status(400).json({ error: 'Please fill all fields' });
   }
@@ -29,14 +32,15 @@ router.post('/users/:userId/MyCart/PaymentDetails', async (req, res) => {
       console.error('Error executing the query: ', error);
       res.status(500).json({ error: 'Internal Server Error' });
     } else {
+      console.log('Results:', results);
       if (results.length === 0) {
         return res.status(404).json({ error: 'User not found' });
       }
 
       const user = results[0];
 
-      // Check if the user's card details match the form data
       if (
+        user.username === username &&
         user.card_number === cardNumber &&
         user.expiration_date === expirationDate &&
         user.cvv === cvv
