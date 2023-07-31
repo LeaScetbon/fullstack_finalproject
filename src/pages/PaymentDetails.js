@@ -16,15 +16,15 @@ function PaymentDetails() {
       };
     
       const handleSubmit = (e) => {
-        e.preventDefault();
-           try {
-           const response = await fetch("http://localhost:3001/PaymentDetails", {
-             method: "POST",
-             headers: {
-               "Content-Type": "application/json",
-             },
-             body: JSON.stringify({ username, email, userpassword }),
-           });
+        // e.preventDefault();
+        //    try {
+        //    const response = await fetch("http://localhost:3001/PaymentDetails", {
+        //      method: "POST",
+        //      headers: {
+        //        "Content-Type": "application/json",
+        //      },
+        //      body: JSON.stringify({ username, email, userpassword }),
+        //    });
          
       };
       // const handleRegister = async (e) => {
