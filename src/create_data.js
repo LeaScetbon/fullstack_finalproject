@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "DaphnaAura19",
 });
 
 // Create the database
@@ -20,14 +20,14 @@ con.query(
       console.log("Database selected");
 
       // Rest of your code (create users table and insert data) here...
-      // con.query(createUsersTableQuery, (err, results) => {
-      //  if (err) throw err;
-      //  console.log("user table created successfully");
+       con.query(createUsersTableQuery, (err, results) => {
+        if (err) throw err;
+        console.log("user table created successfully");
 
       // Insert users data into the table
-      // con.query(insertUserQuery, [userDataValues], (err, results) => {
-      //   if (err) throw err;
-      //  console.log("Users data inserted successfully");
+       con.query(insertUserQuery, [userDataValues], (err, results) => {
+         if (err) throw err;
+        console.log("Users data inserted successfully");
 
       // con.query(createProductsTableQuery, (err, results) => {
       //   if (err) throw err;
@@ -57,8 +57,8 @@ con.query(
         //  });
       });
       });
-      //});
-      //});
+      });
+      });
     });
   }
 );
@@ -70,7 +70,10 @@ CREATE TABLE IF NOT EXISTS users (
   username VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   usertype VARCHAR(255) NOT NULL,
-  userpassword INT NOT NULL 
+  userpassword INT NOT NULL, 
+  card_number BIGINT(16) NOT NULL,
+  expiration_date DATE NOT NULL,
+  cvv INT(3) NOT NULL
 );
 `;
 
@@ -81,6 +84,10 @@ const usersData = [
     email: "lea@gmail.com",
     usertype: "client",
     userpassword: 1234,
+    card_number: 1111111111111111,
+    expiration_date: "2025-01-01",
+    cvv: 123,
+
   },
   {
     id: 2,
@@ -88,6 +95,9 @@ const usersData = [
     email: "jane.smith@gmail.com",
     usertype: "client",
     userpassword: 56,
+    card_number: 1111111111111112,
+    expiration_date: "2025-01-02",
+    cvv: 123,
   },
   {
     id: 3,
@@ -95,6 +105,9 @@ const usersData = [
     email: "michael.johnson@gmail.com",
     usertype: "client",
     userpassword: 7,
+    card_number: 1111111111111113,
+    expiration_date: "2025-01-03",
+    cvv: 123,
   },
   {
     id: 4,
@@ -102,6 +115,9 @@ const usersData = [
     email: "emily.brown@gmail.com",
     usertype: "client",
     userpassword: 8,
+    card_number: 1111111111111114,
+    expiration_date: "2025-01-04",
+    cvv: 123,
   },
   {
     id: 5,
@@ -109,6 +125,9 @@ const usersData = [
     email: "william.lee@gmail.com",
     usertype: "client",
     userpassword: 9,
+    card_number: 1111111111111115,
+    expiration_date: "2025-01-05",
+    cvv: 123,
   },
   {
     id: 6,
@@ -116,6 +135,9 @@ const usersData = [
     email: "sophia.martinez@gmail.com",
     usertype: "client",
     userpassword: 111,
+    card_number: 1111111111111116,
+    expiration_date: "2025-01-06",
+    cvv: 123,
   },
   {
     id: 7,
@@ -123,6 +145,9 @@ const usersData = [
     email: "oliver.wilson@gmail.com",
     usertype: "client",
     userpassword: 756,
+    card_number: 1111111111111117,
+    expiration_date: "2025-01-07",
+    cvv: 123,
   },
   {
     id: 8,
@@ -130,6 +155,9 @@ const usersData = [
     email: "ava.johnson@gmail.com",
     usertype: "client",
     userpassword: 25,
+    card_number: 1111111111111118,
+    expiration_date: "2025-01-08",
+    cvv: 123,
   },
   {
     id: 9,
@@ -137,6 +165,9 @@ const usersData = [
     email: "ethan.taylor@gmail.com",
     usertype: "client",
     userpassword: 482,
+    card_number: 1111111111111119,
+    expiration_date: "2025-01-09",
+    cvv: 123,
   },
   {
     id: 10,
@@ -144,6 +175,9 @@ const usersData = [
     email: "isabella.anderson@gmail.com",
     usertype: "client",
     userpassword: 9876,
+    card_number: 1111111111111121,
+    expiration_date: "2025-01-11",
+    cvv: 123,
   },
   {
     id: 11,
@@ -151,6 +185,9 @@ const usersData = [
     email: "nov@gmail.com",
     usertype: "admin",
     userpassword: 1234,
+    card_number: 1111111111111131,
+    expiration_date: "2025-01-12",
+    cvv: 123,
   },
 ];
 
@@ -162,6 +199,9 @@ const userDataValues = usersData.map((user) => [
   user.email,
   user.usertype,
   user.userpassword,
+  user.card_number,
+  user.expiration_date,
+  user.cvv,
 ]);
 
 const createProductsTableQuery = `

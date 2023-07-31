@@ -56,8 +56,8 @@ router.get('/login', (req, res) => {
       return res.status(400).json({ error: 'Username and password are required' });
     }
   
-    const query = 'INSERT INTO users (username, userpassword, email, usertype) VALUES (?, ?, ?, ?)';
-    connection.query(query, [username, userpassword, email, "client"], (error, results) => {
+    const query = 'INSERT INTO users (username, userpassword, email, usertype, card_number,expiration_date, cvv ) VALUES (?, ?, ?, ?, ?, ?, ?)';
+    connection.query(query, [username, userpassword, email, "client", '0000000000000000', "2025-01-01", 234], (error, results) => {
       if (error) {
         console.error('Error executing the query: ', error);
         res.status(500).json({ error: 'Internal Server Error' });

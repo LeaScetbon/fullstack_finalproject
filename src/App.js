@@ -11,6 +11,8 @@ import Recipies from "./pages/Recipies";
 import "./App.css";
 import Navbar from "./pages/Navbar";
 import About from "./pages/About";
+import PaymentDetails from "./pages/PaymentDetails";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 function App() {
   return (
     <>
@@ -25,20 +27,12 @@ function App() {
           <Route path="/users/:userId/MyCart" element={<MyCart />} />
           <Route path="/Recipies" element={<Recipies />} />
           <Route path="/About" element={<About />} />
+          <Route path="/PaymentDetails" element={<PaymentDetails />} />
+          <Route path="/PaymentConfirmation" element={<PaymentConfirmation />} />
         </Routes>
       </div>
     </>
-    /**
-    <BrowserRouter>
-    <Routes className='navbar'>
-    <Route path="/" element={<Login />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/home" element={<Home/>} />
-    <Route path="/products" element={<Products/>} />
-    <Route path="/users/:userId/myCart" element={<MyCart/>} />
-    </Routes>
-  </BrowserRouter> */
+  
   );
 }
 
