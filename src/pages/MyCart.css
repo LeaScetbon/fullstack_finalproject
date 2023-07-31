@@ -1,0 +1,10 @@
+/* Add this CSS to your existing CSS or create a new CSS file */
+.my-cart {
+    padding: 20px;
+  }
+  
+  .cart-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }

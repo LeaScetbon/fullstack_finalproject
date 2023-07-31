@@ -19,49 +19,59 @@ con.query(
       if (err) throw err;
       console.log("Database selected");
 
-      // Rest of your code (create users table and insert data) here...
-       con.query(createUsersTableQuery, (err, results) => {
-        if (err) throw err;
-        console.log("user table created successfully");
+      // //Rest of your code (create users table and insert data) here...
+      // con.query(createUsersTableQuery, (err, results) => {
+      //   if (err) throw err;
+      //   console.log("user table created successfully");
 
-      // Insert users data into the table
-       con.query(insertUserQuery, [userDataValues], (err, results) => {
-         if (err) throw err;
-        console.log("Users data inserted successfully");
+      //   // Insert users data into the table:
+      //   con.query(insertUserQuery, [userDataValues], (err, results) => {
+      //     if (err) throw err;
+      //     console.log("Users data inserted successfully");
 
+      // // create product table data into the table:
       // con.query(createProductsTableQuery, (err, results) => {
       //   if (err) throw err;
       //   console.log("product table created successfully");
 
-      // Insert products data into the table
-      //con.query(insertProductQuery, [productDataValues], (err, results) => {
-      //if (err) throw err;
-      //console.log("Products data inserted successfully");
-       con.query(createRecipeTableQuery, (err, results) => {
-            if (err) throw err;
-            console.log("recipe table created successfully");
+      //   // Insert products data into the table
+      //   con.query(insertProductQuery, [productDataValues], (err, results) => {
+      //     if (err) throw err;
+      //     console.log("Products data inserted successfully");
 
-      con.query(createCartTableQuery, (err, results) => {
+      // create recipe data into the table
+      con.query(createRecipeTableQuery, (err, results) => {
         if (err) throw err;
-        console.log("mycart table created successfully");
+        console.log("recipe table created successfully");
+
+        // inserted recipe data into the table
 
         con.query(insertRecipeQuery, [recipeDataValues], (err, results) => {
-        if (err) throw err;
-        console.log("Recipes data inserted successfully");
-
-        // Close the connection after completing all queries
-        con.end(function (err) {
           if (err) throw err;
-          console.log("Connection closed");
-        });
+          console.log("Recipes data inserted successfully");
+
+          // Insert mycart data into the table
+          con.query(createCartTableQuery, (err, results) => {
+            if (err) throw err;
+            console.log("mycart table created successfully");
+
+            // Close the connection after completing all queries
+            con.end(function (err) {
+              if (err) throw err;
+              console.log("Connection closed");
+            });
           });
-      });
-      });
-      });
+        });
       });
     });
   }
 );
+//     });
+//   }
+// );
+//     });
+//   }
+// );
 
 // create users table
 const createUsersTableQuery = `
@@ -74,6 +84,11 @@ CREATE TABLE IF NOT EXISTS users (
   card_number BIGINT(16) NOT NULL,
   expiration_date VARCHAR(255) NOT NULL,
   cvv INT(3) NOT NULL
+  userpassword INT NOT NULL, 
+  card_number BIGINT(16) NOT NULL,
+  expiration_date VARCHAR(255) NOT NULL,
+  cvv INT(3) NOT NULL
+
 );
 `;
 
@@ -87,7 +102,6 @@ const usersData = [
     card_number: 1111111111111111,
     expiration_date: "2025-01-01",
     cvv: 123,
-
   },
   {
     id: 2,
@@ -95,6 +109,9 @@ const usersData = [
     email: "jane.smith@gmail.com",
     usertype: "client",
     userpassword: 56,
+    card_number: 1111111111111112,
+    expiration_date: "2025-01-02",
+    cvv: 123,
     card_number: 1111111111111112,
     expiration_date: "2025-01-02",
     cvv: 123,
@@ -108,6 +125,9 @@ const usersData = [
     card_number: 1111111111111113,
     expiration_date: "2025-01-03",
     cvv: 123,
+    card_number: 1111111111111113,
+    expiration_date: "2025-01-03",
+    cvv: 123,
   },
   {
     id: 4,
@@ -115,6 +135,9 @@ const usersData = [
     email: "emily.brown@gmail.com",
     usertype: "client",
     userpassword: 8,
+    card_number: 1111111111111114,
+    expiration_date: "2025-01-04",
+    cvv: 123,
     card_number: 1111111111111114,
     expiration_date: "2025-01-04",
     cvv: 123,
@@ -128,6 +151,9 @@ const usersData = [
     card_number: 1111111111111115,
     expiration_date: "2025-01-05",
     cvv: 123,
+    card_number: 1111111111111115,
+    expiration_date: "2025-01-05",
+    cvv: 123,
   },
   {
     id: 6,
@@ -135,6 +161,9 @@ const usersData = [
     email: "sophia.martinez@gmail.com",
     usertype: "client",
     userpassword: 111,
+    card_number: 1111111111111116,
+    expiration_date: "2025-01-06",
+    cvv: 123,
     card_number: 1111111111111116,
     expiration_date: "2025-01-06",
     cvv: 123,
@@ -148,6 +177,9 @@ const usersData = [
     card_number: 1111111111111117,
     expiration_date: "2025-01-07",
     cvv: 123,
+    card_number: 1111111111111117,
+    expiration_date: "2025-01-07",
+    cvv: 123,
   },
   {
     id: 8,
@@ -155,6 +187,9 @@ const usersData = [
     email: "ava.johnson@gmail.com",
     usertype: "client",
     userpassword: 25,
+    card_number: 1111111111111118,
+    expiration_date: "2025-01-08",
+    cvv: 123,
     card_number: 1111111111111118,
     expiration_date: "2025-01-08",
     cvv: 123,
@@ -168,6 +203,9 @@ const usersData = [
     card_number: 1111111111111119,
     expiration_date: "2025-01-09",
     cvv: 123,
+    card_number: 1111111111111119,
+    expiration_date: "2025-01-09",
+    cvv: 123,
   },
   {
     id: 10,
@@ -178,6 +216,9 @@ const usersData = [
     card_number: 1111111111111121,
     expiration_date: "2025-01-11",
     cvv: 123,
+    card_number: 1111111111111121,
+    expiration_date: "2025-01-11",
+    cvv: 123,
   },
   {
     id: 11,
@@ -185,6 +226,9 @@ const usersData = [
     email: "nov@gmail.com",
     usertype: "admin",
     userpassword: 1234,
+    card_number: 1111111111111131,
+    expiration_date: "2025-01-12",
+    cvv: 123,
     card_number: 1111111111111131,
     expiration_date: "2025-01-12",
     cvv: 123,
@@ -199,6 +243,9 @@ const userDataValues = usersData.map((user) => [
   user.email,
   user.usertype,
   user.userpassword,
+  user.card_number,
+  user.expiration_date,
+  user.cvv,
   user.card_number,
   user.expiration_date,
   user.cvv,
@@ -227,7 +274,8 @@ const ProductsData = [
     colors: ["Red", "Blue", "Black"],
     in_stock: true,
     weight: 200,
-    product_picture: "oven_mitts.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Foven_mitts.jpeg?alt=media&token=b8c71330-fbc7-48f3-9e81-cfa29eca23bc",
     reviews: [],
   },
 
@@ -241,7 +289,8 @@ const ProductsData = [
     colors: ["Silver"],
     in_stock: true,
     weight: 400,
-    product_picture: "baking_pan.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbaking_pan.jpeg?alt=media&token=e2c60d8a-137f-42ff-b3ba-d47e2e8acf05",
     reviews: [
       {
         user: "baker87",
@@ -260,7 +309,8 @@ const ProductsData = [
     colors: ["Black", "Stainless Steel"],
     in_stock: true,
     weight: 250,
-    product_picture: "chef_knife.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fchef_knife.jpeg?alt=media&token=f11aab52-8fd7-4227-903a-f358b3815df6",
     reviews: [],
   },
   {
@@ -288,7 +338,7 @@ const ProductsData = [
     in_stock: true,
     weight: 800,
     product_picture:
-      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbaking_pan.jpeg?alt=media&token=e2c60d8a-137f-42ff-b3ba-d47e2e8acf05g",
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fmixing_bowls.jpeg?alt=media&token=e3bc1854-6a42-4fcd-add3-1fbb12282b37",
     reviews: [
       {
         user: "baker123",
@@ -307,7 +357,8 @@ const ProductsData = [
     colors: ["White", "Black", "Silver"],
     in_stock: true,
     weight: 700,
-    product_picture: "hand_mixer.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fhand_mixer.jpeg?alt=media&token=227c64b9-c1fe-4a9c-93fe-b95b67fcd5ff",
     reviews: [],
   },
   {
@@ -320,7 +371,8 @@ const ProductsData = [
     colors: ["Brown"],
     in_stock: true,
     weight: 400,
-    product_picture: "rolling_pin.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Frolling_pin.jpeg?alt=media&token=6da82414-41ce-4df2-9937-6c71dbe71d28",
     reviews: [
       {
         user: "pastrylover",
@@ -340,7 +392,8 @@ const ProductsData = [
     colors: ["White"],
     in_stock: true,
     weight: 250,
-    product_picture: "baking_soda.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbaking_soda.jpeg?alt=media&token=77d6a8b6-1f95-4746-9a05-e10040bd513f",
     reviews: [],
   },
   {
@@ -353,7 +406,8 @@ const ProductsData = [
     colors: ["Grey"],
     in_stock: true,
     weight: 300,
-    product_picture: "measuring_cups.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fmeasuring_cups.jpeg?alt=media&token=0ee46934-acdf-4d19-b853-8042ed3b8d94",
     reviews: [
       {
         user: "chefAnna",
@@ -372,7 +426,8 @@ const ProductsData = [
     colors: ["White", "Silver"],
     in_stock: true,
     weight: 500,
-    product_picture: "kitchen_scale.jpg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fkitchen_scale.jpg?alt=media&token=b733841d-41ee-4aad-ba5e-0e531884e776",
     reviews: [],
   },
   {
@@ -385,7 +440,8 @@ const ProductsData = [
     colors: ["Pink"],
     in_stock: true,
     weight: 900,
-    product_picture: "cupcake_baking_kit.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fcupcake_baking_kit.jpeg?alt=media&token=3a7a960c-54c3-4f07-bee1-97d3a50b4a5f",
     reviews: [],
   },
   {
@@ -398,7 +454,8 @@ const ProductsData = [
     colors: ["Clear", "Blue"],
     in_stock: true,
     weight: 150,
-    product_picture: "piping_bags.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fpiping_bags.jpeg?alt=media&token=faea5104-8192-41e4-b7ce-9dd01efd938a",
     reviews: [],
   },
   {
@@ -411,7 +468,8 @@ const ProductsData = [
     colors: ["Silver"],
     in_stock: true,
     weight: 350,
-    product_picture: "bread_loaf_pan.jpg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fbread_loaf_pan.jpeg?alt=media&token=59ab0555-e99c-49e5-b08b-568744fcacd0",
     reviews: [],
   },
   {
@@ -424,7 +482,8 @@ const ProductsData = [
     colors: ["Yellow", "Green", "Blue"],
     in_stock: true,
     weight: 120,
-    product_picture: "cookie_cutters.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fcookie_cutters.jpeg?alt=media&token=bb91dcea-2c43-40ed-b4da-5fdbb6fec6f8",
     reviews: [],
   },
   {
@@ -437,7 +496,8 @@ const ProductsData = [
     colors: ["Red", "Blue"],
     in_stock: true,
     weight: 90,
-    product_picture: "mixing_spatula.jpeg",
+    product_picture:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Fproducts%2Fmixing_spatula.jpeg?alt=media&token=65fc1de6-947c-4852-b4f4-cf9a0c8079a0",
     reviews: [],
   },
 ];
@@ -462,7 +522,7 @@ CREATE TABLE Recipe (
   receipt_id INT PRIMARY KEY,
   receipt_name VARCHAR(100),
   link VARCHAR(255),
-  receipt_pdf BLOB, -- Binary Large Object to store the PDF data
+  receipt_text LONGTEXT, 
   picture_url VARCHAR(255) -- Text field to store the URL of the picture
 );`;
 
@@ -481,45 +541,51 @@ const RecipeData = [
     receipt_id: 1,
     receipt_name: "Chocolate Cake Recipe",
     link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
-    receipt_pdf: "chocolate_cake_recipe.pdf",
+    receipt_text:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fchocolate_cake_picture.jpeg?alt=media&token=e59bc22e-66f9-4e69-b32f-f85679a80227",
     picture_url: "chocolate_cake_picture.jpeg",
   },
   {
     receipt_id: 2,
     receipt_name: "Blueberry Muffins",
     link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
-    receipt_pdf: "blueberry_muffins_recipe.pdf",
-    picture_url: "blueberry_muffins_picture.jpeg",
+    receipt_text: "",
+
+    picture_url:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fblueberry_muffins_picture.jpeg?alt=media&token=275afd92-0ce9-4215-b1b9-6bfb31b4c370",
   },
   {
     receipt_id: 3,
     receipt_name: "Apple Pie",
     link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
-    receipt_pdf: "apple_pie_recipe.pdf",
-    picture_url: "apple_pie_picture.jpeg",
+    receipt_text: "apple_pie_recipe.pdf",
+    picture_url:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fapple_pie_picture.jpeg?alt=media&token=77f3cf92-0193-421d-9df7-4ddcaadaf93b",
   },
   {
     receipt_id: 4,
     receipt_name: "Banana Bread",
     link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
-    receipt_pdf: "banana_bread_recipe.pdf",
-    picture_url: "https://www.example.com/banana_bread_picture.jpg",
+    receipt_text: "banana_bread_recipe.pdf",
+    picture_url:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fbanana_bread_picture.jpg?alt=media&token=4e24016f-6a88-4579-9ee0-0b2f17bbd50b",
   },
   {
     receipt_id: 5,
     receipt_name: "Carrot Cake",
     link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
-    receipt_pdf: "carrot_cake_recipe.pdf",
-    picture_url: "carrot_cake_picture.jpeg",
+    receipt_text: "carrot_cake_recipe.pdf",
+    picture_url:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fcarrot_cake_picture.jpeg?alt=media&token=40836ddc-0d6f-424d-b891-8b6aa0c1a51a",
   },
 ];
 const insertRecipeQuery =
-  "INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES ?";
+  "INSERT INTO recipe (receipt_id, receipt_name, link, receipt_text, picture_url) VALUES ?";
 const recipeDataValues = RecipeData.map((recipe) => [
   recipe.receipt_id,
   recipe.receipt_name,
   recipe.link,
-  recipe.receipt_pdf,
+  recipe.receipt_text,
   recipe.picture_url,
 ]);
 
