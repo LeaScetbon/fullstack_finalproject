@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { Link, useMatch, useResolvedPath, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { FiLogOut } from "react-icons/fi";
 import thePinkBImage from "../assets/the_pink_b.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUtensils,
+  faShoppingCart,
+  faInfoCircle,
+  faHome,
+  faBagShopping,
+} from "@fortawesome/free-solid-svg-icons";
+import { FiLogOut } from "react-icons/fi"; // Add this import
+
 export default function Navbar() {
   const [user, setUser] = useState(
     // JSON.parse(localStorage.getItem("username"))
@@ -32,19 +41,30 @@ export default function Navbar() {
 
       <ul>
         <li>
-          <CustomLink to="/Recipies">Recipies</CustomLink>
+          <CustomLink to="/Recipies">
+            Recipies
+            <FontAwesomeIcon icon={faUtensils} />
+          </CustomLink>
         </li>
         <li>
-          <CustomLink to="/products">Products</CustomLink>
+          <CustomLink to="/products">
+            <span>Products</span> <FontAwesomeIcon icon={faBagShopping} />
+          </CustomLink>
         </li>
         <li>
-          <CustomLink to={`/users/${user.id}/MyCart`}>My Cart</CustomLink>
+          <CustomLink to={`/users/${user.id}/MyCart`}>
+            My Cart <FontAwesomeIcon icon={faShoppingCart} />
+          </CustomLink>
         </li>
         <li>
-          <CustomLink to="/About">About</CustomLink>
+          <CustomLink to="/About">
+            About <FontAwesomeIcon icon={faInfoCircle} />
+          </CustomLink>
         </li>
         <li>
-          <CustomLink to="/Home">Home</CustomLink>
+          <CustomLink to="/Home">
+            Home <FontAwesomeIcon icon={faHome} />
+          </CustomLink>
         </li>
         <li isActive="false">
           <button className="logout" onClick={handleLogout}>

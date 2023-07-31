@@ -1,18 +1,62 @@
 /* Add this CSS to your existing styles or create a new CSS file */
+.product {
+  margin: 20px;
+}
+
+.product h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust the column width as needed */
     grid-gap: 20px; /* Add a gap between grid items */
   }
-  
+  /* Add this CSS to your existing styles or create a new CSS file */
+ 
+
   .product-item {
     border: 1px solid #ccc;
     padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(205, 15, 126, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 400px;
   }
   
+  /* Adjust other styles as needed */
   .product-item img {
     max-width: 100%; /* Set the maximum width of the image to its container's width */
     height: auto; /* Ensure the image retains its aspect ratio */
   }
+
+ 
+  
+  .product-item h3 {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .product-item p {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .product-item button {
+    background-color: #dc0db6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-item button:hover {
+    background-color: #a04591;
+  }
+  

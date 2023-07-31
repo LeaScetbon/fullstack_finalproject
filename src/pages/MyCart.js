@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import "./MyCart.css";
 function MyCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const userId = JSON.parse(localStorage.getItem("username")).id;
@@ -76,17 +78,22 @@ function MyCart() {
 
   return (
     <div className="my-cart">
-      <h2>My Cart</h2>
-      <div className="cart-items">
-        {cartProducts && cartProducts.length > 0 ? (
-          cartProducts.map((product) => (
-            <div key={product.product_id} className="cart-item">
+      <h2>
+        <FontAwesomeIcon icon={faShoppingCart} /> My Cart
+      </h2>
+      {cartProducts && cartProducts.length > 0 ? (
+        <ul className="cart-items">
+          {" "}
+          {/* Use <ul> for an unordered list */}
+          {cartProducts.map((product) => (
+            <li key={product.product_id} className="cart-item">
+              {" "}
+              {/* Wrap each cart item in an <li> */}
               <h3>{product.product_name}</h3>
               <img src={product.product_picture} alt={product.product_name} />
-
               <h3>{product.price * product.quantity.toFixed(2) + "$"}</h3>
               <div>
-                <h3>Quantity:</h3>
+                <h3 className="small">Quantity:</h3>
                 <input
                   type="number"
                   value={product.quantity}
@@ -97,16 +104,17 @@ function MyCart() {
                 />
               </div>
               <button
+                className="delete-button"
                 onClick={() => handleDeleteProduct(product.product_id, userId)}
               >
                 Delete
               </button>
-            </div>
-          ))
-        ) : (
-          <p>No items in the cart.</p>
-        )}
-      </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No items in the cart.</p>
+      )}
       <div className="total-price">
         <h3>Total Price: ${getTotalPrice().toFixed(2)}</h3>
       </div>

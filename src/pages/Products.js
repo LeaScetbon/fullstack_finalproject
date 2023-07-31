@@ -2,6 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
 import "./Products.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUtensils,
+  faShoppingCart,
+  faInfoCircle,
+  faHome,
+  faBagShopping,
+} from "@fortawesome/free-solid-svg-icons";
+import { FiLogOut } from "react-icons/fi"; // Add this import
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -36,7 +45,7 @@ function Products() {
         `http://localhost:3001/users/${userId}/MyCart`
       );
       const data = await response.json();
-      
+
       if (Array.isArray(data)) {
         // Make sure data is an array, and then set the addedProducts state
         setAddedProducts(data);
@@ -81,7 +90,7 @@ function Products() {
       alert("Error adding the product to the cart: " + error.message);
     }
   };
-  
+
   const handleAddProduct = async (event) => {
     event.preventDefault();
     const colorsArray = newProduct.colors
@@ -136,7 +145,7 @@ function Products() {
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/products/${productId}`, 
+        `http://localhost:3001/products/${productId}`,
         {
           method: "DELETE",
         }
@@ -165,7 +174,7 @@ function Products() {
             (product) => product.product_id !== productId
           )
         );
-      } 
+      }
       // else {
       //   alert("Failed to delete product");
       // }
@@ -181,14 +190,20 @@ function Products() {
 
   return (
     <div className="product">
-      <h2>Products</h2>
+      <h2>
+        <FontAwesomeIcon icon={faShoppingCart} /> My Cart
+      </h2>
       <div className="product-list">
         {products.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             {console.log("Product Picture URL:", product.product_picture)}{" "}
             {/* Add this line */}
-            <img src={product.product_picture} alt={product.product_name} />
+            <img
+              className="product-image"
+              src={product.product_picture}
+              alt={product.product_name}
+            />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
@@ -203,7 +218,11 @@ function Products() {
         {addedProducts.map((product) => (
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
-            <img src={product.product_picture} alt={product.product_name} />
+            <img
+              className="product-image"
+              src={product.product_picture}
+              alt={product.product_name}
+            />
             <h3>{product.price + "$"}</h3>
             <button onClick={() => handleAddToCart(product.product_id)}>
               Add to My Cart
