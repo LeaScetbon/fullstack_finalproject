@@ -105,8 +105,25 @@ function Recipies() {
         {recipies.map((recipe) => (
           <div key={recipe.receipt_id} className="recipe-item">
             <h3>{recipe.receipt_name}</h3>
-            <img src={recipe.picture_url} alt={recipe.receipt_name} />
-            
+            <div>
+              <img src={recipe.picture_url} alt={recipe.receipt_name} />
+            </div>
+            <a
+              href={recipe.link}
+              target="_blank" // This will open the video in a new tab
+              rel="noopener noreferrer" // Security best practices for links opening in a new tab
+            >
+              Watch Video
+            </a>
+            {/* <iframe 
+              width="280" 
+              height="250" 
+              src= {recipe.link} 
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen
+          ></iframe> */}
             {console.log("recipe Picture URL:", recipe.picture_url)}{" "}
             <h5>{recipe.receipt_text}</h5>
             {userType === "admin" && (
