@@ -72,7 +72,11 @@ export default function Navbar() {
             Home <FontAwesomeIcon icon={faHome} />
           </CustomLink>
         </li>
-
+        {/* <li>
+          <CustomLink to="/PaymentConfirmation">
+            PaymentConfirmation <FontAwesomeIcon icon={faLitecoinSign} />
+          </CustomLink>
+        </li> */}
         <CustomLink to="/Login" onClick={handleLogout}>
           Logout <FontAwesomeIcon icon={faSignOut} />
         </CustomLink>
