@@ -12,5 +12,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
-  /* Adjust other styles as needed */
-  
+  .product-item img {
+    max-width: 100%; /* Set the maximum width of the image to its container's width */
+    height: auto; /* Ensure the image retains its aspect ratio */
+  }
