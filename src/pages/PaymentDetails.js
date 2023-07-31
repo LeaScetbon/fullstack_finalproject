@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./PaymentDetails.css";
 function PaymentDetails() {
   const [formData, setFormData] = useState({
-    name: '',
-    cardNumber: '',
-    expirationDate: '',
-    cvv: '',
+    name: "",
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
   });
   const navigate = useNavigate();
 
@@ -18,27 +18,30 @@ function PaymentDetails() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userId = JSON.parse(localStorage.getItem('username')).id;
+      const userId = JSON.parse(localStorage.getItem("username")).id;
       if (!userId) {
-        alert('User ID not found in local storage');
+        alert("User ID not found in local storage");
         return;
       }
-  
+
       // Convert cardNumber to a number before sending to the server
       const updatedFormData = {
         ...formData,
         cardNumber: Number(formData.cardNumber),
-        username: JSON.parse(localStorage.getItem('username')).username,
+        username: JSON.parse(localStorage.getItem("username")).username,
       };
-  
-      const response = await fetch(`http://localhost:3001/users/${userId}/MyCart/PaymentDetails`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedFormData),
-      });
-  
+
+      const response = await fetch(
+        `http://localhost:3001/users/${userId}/MyCart/PaymentDetails`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      );
+
       const data = await response.json();
       console.log(data);
       // Assuming the response from the server contains a "message" field for successful payment
@@ -50,15 +53,14 @@ function PaymentDetails() {
       }
     } catch (error) {
       console.error(error);
-      alert('An error occurred while processing the payment');
+      alert("An error occurred while processing the payment");
     }
   };
-  
 
   return (
-    <div>
+    <div className="payment-container">
       <h2>Bank Account Details</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="payment-form">
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -70,7 +72,7 @@ function PaymentDetails() {
             required
           />
         </div>
-    
+
         <div>
           <label htmlFor="cardNumber">Card Number:</label>
           <input
@@ -85,7 +87,7 @@ function PaymentDetails() {
         <div>
           <label htmlFor="expirationDate">Expiration Date:</label>
           <input
-            type="date"
+            type="text"
             id="expirationDate"
             name="expirationDate"
             value={formData.expirationDate}
@@ -111,6 +113,3 @@ function PaymentDetails() {
 }
 
 export default PaymentDetails;
-
-
-
