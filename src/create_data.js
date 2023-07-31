@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "DaphnaAura19",
 });
 
 // Create the database
@@ -84,6 +84,10 @@ CREATE TABLE IF NOT EXISTS users (
   card_number BIGINT(16) NOT NULL,
   expiration_date DATE NOT NULL,
   cvv INT(3) NOT NULL
+  userpassword INT NOT NULL, 
+  card_number BIGINT(16) NOT NULL,
+  expiration_date DATE NOT NULL,
+  cvv INT(3) NOT NULL
 );
 `;
 
@@ -107,6 +111,9 @@ const usersData = [
     card_number: 1111111111111112,
     expiration_date: "2025-01-02",
     cvv: 123,
+    card_number: 1111111111111112,
+    expiration_date: "2025-01-02",
+    cvv: 123,
   },
   {
     id: 3,
@@ -114,6 +121,9 @@ const usersData = [
     email: "michael.johnson@gmail.com",
     usertype: "client",
     userpassword: 7,
+    card_number: 1111111111111113,
+    expiration_date: "2025-01-03",
+    cvv: 123,
     card_number: 1111111111111113,
     expiration_date: "2025-01-03",
     cvv: 123,
@@ -127,6 +137,9 @@ const usersData = [
     card_number: 1111111111111114,
     expiration_date: "2025-01-04",
     cvv: 123,
+    card_number: 1111111111111114,
+    expiration_date: "2025-01-04",
+    cvv: 123,
   },
   {
     id: 5,
@@ -134,6 +147,9 @@ const usersData = [
     email: "william.lee@gmail.com",
     usertype: "client",
     userpassword: 9,
+    card_number: 1111111111111115,
+    expiration_date: "2025-01-05",
+    cvv: 123,
     card_number: 1111111111111115,
     expiration_date: "2025-01-05",
     cvv: 123,
@@ -147,6 +163,9 @@ const usersData = [
     card_number: 1111111111111116,
     expiration_date: "2025-01-06",
     cvv: 123,
+    card_number: 1111111111111116,
+    expiration_date: "2025-01-06",
+    cvv: 123,
   },
   {
     id: 7,
@@ -154,6 +173,9 @@ const usersData = [
     email: "oliver.wilson@gmail.com",
     usertype: "client",
     userpassword: 756,
+    card_number: 1111111111111117,
+    expiration_date: "2025-01-07",
+    cvv: 123,
     card_number: 1111111111111117,
     expiration_date: "2025-01-07",
     cvv: 123,
@@ -167,6 +189,9 @@ const usersData = [
     card_number: 1111111111111118,
     expiration_date: "2025-01-08",
     cvv: 123,
+    card_number: 1111111111111118,
+    expiration_date: "2025-01-08",
+    cvv: 123,
   },
   {
     id: 9,
@@ -174,6 +199,9 @@ const usersData = [
     email: "ethan.taylor@gmail.com",
     usertype: "client",
     userpassword: 482,
+    card_number: 1111111111111119,
+    expiration_date: "2025-01-09",
+    cvv: 123,
     card_number: 1111111111111119,
     expiration_date: "2025-01-09",
     cvv: 123,
@@ -187,6 +215,9 @@ const usersData = [
     card_number: 1111111111111121,
     expiration_date: "2025-01-11",
     cvv: 123,
+    card_number: 1111111111111121,
+    expiration_date: "2025-01-11",
+    cvv: 123,
   },
   {
     id: 11,
@@ -194,6 +225,9 @@ const usersData = [
     email: "nov@gmail.com",
     usertype: "admin",
     userpassword: 1234,
+    card_number: 1111111111111131,
+    expiration_date: "2025-01-12",
+    cvv: 123,
     card_number: 1111111111111131,
     expiration_date: "2025-01-12",
     cvv: 123,
@@ -208,6 +242,9 @@ const userDataValues = usersData.map((user) => [
   user.email,
   user.usertype,
   user.userpassword,
+  user.card_number,
+  user.expiration_date,
+  user.cvv,
   user.card_number,
   user.expiration_date,
   user.cvv,

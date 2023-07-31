@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function MyCart() {
   const [cartProducts, setCartProducts] = useState([]);
   const userId = JSON.parse(localStorage.getItem("username")).id;
+
+  const navigate = useNavigate();
 
   const fetchCartProductsFromServer = async () => {
     try {
@@ -53,6 +56,10 @@ function MyCart() {
       console.error(error);
       alert("Error updating the quantity: " + error.message);
     }
+  };
+
+  const handlePayment = () => {
+    navigate("/PaymentDetails");
   };
 
   useEffect(() => {
