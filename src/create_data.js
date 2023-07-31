@@ -4,7 +4,7 @@ const mysql = require("mysql2");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "DaphnaAura19",
+  password: "password",
 });
 
 // Create the database
@@ -21,8 +21,8 @@ con.query(
 
       // //Rest of your code (create users table and insert data) here...
       // con.query(createUsersTableQuery, (err, results) => {
-        // if (err) throw err;
-        // console.log("user table created successfully");
+      // if (err) throw err;
+      // console.log("user table created successfully");
 
       //   // Insert users data into the table:
       //   con.query(insertUserQuery, [userDataValues], (err, results) => {
@@ -30,14 +30,14 @@ con.query(
       //     console.log("Users data inserted successfully");
 
       // // create product table data into the table:
-       //con.query(createProductsTableQuery, (err, results) => {
-         //if (err) throw err;
-         //console.log("product table created successfully");
+      //con.query(createProductsTableQuery, (err, results) => {
+      //if (err) throw err;
+      //console.log("product table created successfully");
 
       //   // Insert products data into the table
-         //con.query(insertProductQuery, [productDataValues], (err, results) => {
-          //if (err) throw err;
-           //console.log("Products data inserted successfully");
+      //con.query(insertProductQuery, [productDataValues], (err, results) => {
+      //if (err) throw err;
+      //console.log("Products data inserted successfully");
 
       // create recipe data into the table
       con.query(createRecipeTableQuery, (err, results) => {
@@ -52,20 +52,20 @@ con.query(
 
           // Insert mycart data into the table
           //con.query(createCartTableQuery, (err, results) => {
-            //if (err) throw err;
-            //console.log("mycart table created successfully");
+          //if (err) throw err;
+          //console.log("mycart table created successfully");
 
-            // Close the connection after completing all queries
-            con.end(function (err) {
-              if (err) throw err;
-              console.log("Connection closed");
-            });
+          // Close the connection after completing all queries
+          con.end(function (err) {
+            if (err) throw err;
+            console.log("Connection closed");
           });
         });
       });
+    });
     //});
- // });
-  //});
+    // });
+    //});
   }
 );
 //     });
@@ -543,14 +543,17 @@ const RecipeData = [
     receipt_id: 1,
     receipt_name: "Chocolate Cake Recipe",
     link: "https://www.youtube.com/watch?v=_fJGviO5WQE",
-    receipt_text:"Prep. Preheat the oven to 350º F. Prepare two 9-inch cake pans by spraying with baking spray or buttering and lightly flouring. Whisk dry ingredients. Add flour, sugar, cocoa, baking powder, baking soda, salt and espresso powder to a large bowl or the bowl of a stand mixer. Whisk through to combine or, using your paddle attachment, stir through flour mixture until combined well.",
-    picture_url: "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fchocolate_cake_picture.jpeg?alt=media&token=e59bc22e-66f9-4e69-b32f-f85679a80227"
+    receipt_text:
+      "Prep. Preheat the oven to 350º F. Prepare two 9-inch cake pans by spraying with baking spray or buttering and lightly flouring. Whisk dry ingredients. Add flour, sugar, cocoa, baking powder, baking soda, salt and espresso powder to a large bowl or the bowl of a stand mixer. Whisk through to combine or, using your paddle attachment, stir through flour mixture until combined well.",
+    picture_url:
+      "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fchocolate_cake_picture.jpeg?alt=media&token=e59bc22e-66f9-4e69-b32f-f85679a80227",
   },
   {
     receipt_id: 2,
     receipt_name: "Blueberry Muffins",
     link: "https://cooking.nytimes.com/recipes/2868-jordan-marshs-blueberry-muffins",
-    receipt_text: "Step 1, Whisk flour, sugar, baking powder, and a little salt in a large bowl. Step 2, Add oil, an egg, milk, and vanilla extract then stir with a fork until blended.Step 3, Mix in the blueberries, divide the batter between muffin cups and bake.",
+    receipt_text:
+      "Step 1, Whisk flour, sugar, baking powder, and a little salt in a large bowl. Step 2, Add oil, an egg, milk, and vanilla extract then stir with a fork until blended.Step 3, Mix in the blueberries, divide the batter between muffin cups and bake.",
 
     picture_url:
       "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fblueberry_muffins_picture.jpeg?alt=media&token=275afd92-0ce9-4215-b1b9-6bfb31b4c370",
@@ -559,8 +562,9 @@ const RecipeData = [
     receipt_id: 3,
     receipt_name: "Apple Pie",
     link: "https://www.youtube.com/watch?v=VFQsDAADPLM",
-    receipt_text: "Heat oven to 425°F. Place 1 pie crust in ungreased 9-inch glass pie plate. Press firmly against side and bottom.In large bowl, gently mix filling ingredients; spoon into crust-lined pie plate. Top with second crust. Wrap excess top crust under bottom crust edge, pressing edges together to seal; flute. Cut slits or shapes in several places in top crust. Bake 40 to 45 minutes or until apples are tender and crust is golden brown. Cover edge of crust with 2- to 3-inch wide strips of foil after first 15 to 20 minutes of baking to prevent excessive browning. Cool on cooling rack at least 2 hours before serving.",
-    
+    receipt_text:
+      "Heat oven to 425°F. Place 1 pie crust in ungreased 9-inch glass pie plate. Press firmly against side and bottom.In large bowl, gently mix filling ingredients; spoon into crust-lined pie plate. Top with second crust. Wrap excess top crust under bottom crust edge, pressing edges together to seal; flute. Cut slits or shapes in several places in top crust. Bake 40 to 45 minutes or until apples are tender and crust is golden brown. Cover edge of crust with 2- to 3-inch wide strips of foil after first 15 to 20 minutes of baking to prevent excessive browning. Cool on cooling rack at least 2 hours before serving.",
+
     picture_url:
       "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fapple_pie_picture.jpeg?alt=media&token=77f3cf92-0193-421d-9df7-4ddcaadaf93b",
   },
@@ -568,7 +572,8 @@ const RecipeData = [
     receipt_id: 4,
     receipt_name: "Banana Bread",
     link: "https://www.youtube.com/watch?v=qUmDpPfY_h0",
-    receipt_text: "Place a rack in center of oven; preheat to 350°. Grease an 8 1/2 metal loaf pan with cooking spray and line with parchment, leaving an overhang on both long sides. In a medium bowl, whisk flour, baking soda, and salt until combined. In a large bowl, whisk eggs, brown sugar, and butter until smooth. Add bananas and vanilla and whisk until well combined (batter will be slightly lumpy). Fold in dry ingredients until incorporated. Pour batter into prepared pan; smooth top with a rubber spatula. Bake bread until risen, golden brown on top, and a tester inserted into the center comes out with a few moist crumbs attached, 50 to 60 minutes. ",
+    receipt_text:
+      "Place a rack in center of oven; preheat to 350°. Grease an 8 1/2 metal loaf pan with cooking spray and line with parchment, leaving an overhang on both long sides. In a medium bowl, whisk flour, baking soda, and salt until combined. In a large bowl, whisk eggs, brown sugar, and butter until smooth. Add bananas and vanilla and whisk until well combined (batter will be slightly lumpy). Fold in dry ingredients until incorporated. Pour batter into prepared pan; smooth top with a rubber spatula. Bake bread until risen, golden brown on top, and a tester inserted into the center comes out with a few moist crumbs attached, 50 to 60 minutes. ",
     picture_url:
       "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fbanana_bread_picture.jpg?alt=media&token=4e24016f-6a88-4579-9ee0-0b2f17bbd50b",
   },
@@ -576,7 +581,8 @@ const RecipeData = [
     receipt_id: 5,
     receipt_name: "Carrot Cake",
     link: "https://www.youtube.com/watch?v=zoyhs-EiJxE",
-    receipt_text: "Dry ingredients in one bowl, wet ingredients in another: I like to whisk my dry ingredients together in one bowl until they are well blended. Then I whisk all the wet ingredients together in another bowl. Fold the dry and wet ingredients together: Then I switch to a rubber spatula or large spoon and fold the two — wet and dry ingredients — together until I don’t see any large streaks of flour. Add carrots, nuts, and raisins: When I’ve got the batter ready, I fold in the carrots, and if I’m using them, the nuts and raisins.",
+    receipt_text:
+      "Dry ingredients in one bowl, wet ingredients in another: I like to whisk my dry ingredients together in one bowl until they are well blended. Then I whisk all the wet ingredients together in another bowl. Fold the dry and wet ingredients together: Then I switch to a rubber spatula or large spoon and fold the two — wet and dry ingredients — together until I don’t see any large streaks of flour. Add carrots, nuts, and raisins: When I’ve got the batter ready, I fold in the carrots, and if I’m using them, the nuts and raisins.",
     picture_url:
       "https://firebasestorage.googleapis.com/v0/b/finalprojectfullstack-2023.appspot.com/o/pictures%2Frecipes%2Fcarrot_cake_picture.jpeg?alt=media&token=40836ddc-0d6f-424d-b891-8b6aa0c1a51a",
   },

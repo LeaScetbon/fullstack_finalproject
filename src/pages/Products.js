@@ -205,14 +205,19 @@ function Products() {
               alt={product.product_name}
             />
             <h3>{product.price + "$"}</h3>
-            <button onClick={() => handleAddToCart(product.product_id)}>
-              Add to My Cart
-            </button>
-            {userType === "admin" && (
-              <button onClick={() => handleDeleteProduct(product.product_id)}>
-                Delete
+            <div className="button-container">
+              <button onClick={() => handleAddToCart(product.product_id)}>
+                Add to My Cart
               </button>
-            )}
+              {userType === "admin" && (
+                <button
+                  className="delete-button"
+                  onClick={() => handleDeleteProduct(product.product_id)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
         ))}
         {addedProducts.map((product) => (

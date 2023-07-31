@@ -9,6 +9,12 @@ import {
   faInfoCircle,
   faHome,
   faBagShopping,
+  faRegistered,
+  faFlorinSign,
+  faLitecoinSign,
+  faDoorOpen,
+  faDoorClosed,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import { FiLogOut } from "react-icons/fi"; // Add this import
 
@@ -66,16 +72,15 @@ export default function Navbar() {
             Home <FontAwesomeIcon icon={faHome} />
           </CustomLink>
         </li>
-        <li isActive="false">
-          <button className="logout" onClick={handleLogout}>
-            <FiLogOut className="logout-icon" />
-          </button>
-        </li>
+
+        <CustomLink to="/Login" onClick={handleLogout}>
+          Logout <FontAwesomeIcon icon={faSignOut} />
+        </CustomLink>
       </ul>
     </nav>
   );
 }
-
+// faRegistered
 function CustomLink({ to, children, ...props }) {
   // <--- Add 'to' here
   const resolvedPath = useResolvedPath(to);

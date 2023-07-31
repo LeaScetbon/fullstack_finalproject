@@ -65,3 +65,57 @@
     margin: 2rem;
     background: rgba(225, 51, 153, .05); 
  }
+
+
+
+
+
+
+
+
+ /* About.css */
+.about {
+    padding: 50px;
+    background-color: #f9f9f9;
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .content {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .content h3 {
+    font-size: 1.8rem;
+  }
+  
+  .content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  

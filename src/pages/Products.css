@@ -26,6 +26,15 @@
     justify-content: space-between;
     align-items: center;
     height: 400px;
+    position: relative; /* Add this line to the .product-item class */
+  }
+  .product-item button.delete-button {
+    background-color: #e43a8a; /* Set the desired background color */
+    border: none;
+    color: #fff;
+    padding: 7px 20px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
   }
   
   /* Adjust other styles as needed */
@@ -46,12 +55,16 @@
     font-size: 14px;
     color: #777;
   }
-  
+ 
+
+
+
   .product-item button {
     background-color: #dc0db6;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    border-radius: 5px;
+    padding: 7px 20px;
     font-size: 14px;
     transition: background-color 0.3s ease;
   }
@@ -60,3 +73,58 @@
     background-color: #a04591;
   }
   
+  .add-product-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .add-product-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .add-product-form form {
+    display: grid;
+    grid-gap: 10px;
+  }
+  
+  .add-product-form input,
+  .add-product-form textarea,
+  .add-product-form label {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .add-product-form label {
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-product-form textarea {
+    resize: vertical;
+  }
+  
+  .add-product-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .add-product-form button:hover {
+    background-color: #0056b3;
+  }
+.button-container {
+  display: flex; /* Use flexbox to make the buttons appear in a row */
+  gap: 10px; /* Optional, to add some space between the buttons */
+}
