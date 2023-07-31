@@ -83,10 +83,7 @@ function MyCart() {
             <div key={product.product_id} className="cart-item">
               <h3>{product.product_name}</h3>
               <img src={product.product_picture} alt={product.product_name} />
-              {console.log(
-                "Product Picture URL:",
-                product.product_picture
-              )}{" "}
+
               <h3>{product.price * product.quantity.toFixed(2) + "$"}</h3>
               <div>
                 <h3>Quantity:</h3>
@@ -112,6 +109,9 @@ function MyCart() {
       </div>
       <div className="total-price">
         <h3>Total Price: ${getTotalPrice().toFixed(2)}</h3>
+      </div>
+      <div className="payment">
+        <button onClick={handlePayment}>Pay Now</button>
       </div>
     </div>
   );
