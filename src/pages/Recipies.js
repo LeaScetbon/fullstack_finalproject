@@ -106,7 +106,9 @@ function Recipies() {
           <div key={recipe.receipt_id} className="recipe-item">
             <h3>{recipe.receipt_name}</h3>
             <img src={recipe.picture_url} alt={recipe.receipt_name} />
+            
             {console.log("recipe Picture URL:", recipe.picture_url)}{" "}
+            <h5>{recipe.receipt_text}</h5>
             {userType === "admin" && (
               <button onClick={() => handleDeleteRecipe(recipe.receipt_id)}>
                 Delete
