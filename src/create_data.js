@@ -82,12 +82,13 @@ CREATE TABLE IF NOT EXISTS users (
   usertype VARCHAR(255) NOT NULL,
   userpassword INT NOT NULL, 
   card_number BIGINT(16) NOT NULL,
-  expiration_date DATE NOT NULL,
+  expiration_date VARCHAR(255) NOT NULL,
   cvv INT(3) NOT NULL
   userpassword INT NOT NULL, 
   card_number BIGINT(16) NOT NULL,
-  expiration_date DATE NOT NULL,
+  expiration_date VARCHAR(255) NOT NULL,
   cvv INT(3) NOT NULL
+
 );
 `;
 
