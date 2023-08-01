@@ -35,15 +35,18 @@ router.get('/Recipies', (req, res) => {
     const {
       receipt_name,
       link,
-      receipt_pdf,
+      receipt_text,
       picture_url
 
     } = req.body;
-  
+    console.log(receipt_name);
+    console.log(link);
+    console.log(receipt_text);
+    console.log(picture_url);
     if (
       !receipt_name ||
       !link ||
-      !receipt_pdf ||
+      !receipt_text ||
       !picture_url
     ) {
       return res.status(400).json({ error: 'Missing required fields' });
@@ -53,8 +56,8 @@ router.get('/Recipies', (req, res) => {
   
     
     connection.query(
-      'INSERT INTO recipe (receipt_id, receipt_name, link, receipt_pdf, picture_url) VALUES (?, ?, ?, ?, ?)',
-      [recipeId, receipt_name, link, receipt_pdf, picture_url],
+      'INSERT INTO recipe (receipt_id, receipt_name, link, receipt_text, picture_url) VALUES (?, ?, ?, ?, ?)',
+      [recipeId, receipt_name, link, receipt_text, picture_url],
       (err, result) => {
         if (err) {
           console.error(err);
@@ -65,7 +68,7 @@ router.get('/Recipies', (req, res) => {
           receipt_id: recipeId,
           receipt_name,
           link,
-          receipt_pdf,
+          receipt_text,
           picture_url
         };
         res.status(201).json(newRecipie);
@@ -74,9 +77,9 @@ router.get('/Recipies', (req, res) => {
   });
   
   router.delete('/recipes/:receipt_id', (req, res) => {
-    const receiptId = req.params.receipt_id;
+    const receiptId = parseInt(req.params.receipt_id, 10);
     const connection = require('./connection.js'); 
-  
+    console.log("Received receiptId:", receiptId); 
   
     const deleteQuery = 'DELETE FROM recipe WHERE receipt_id = ?';
     connection.query(deleteQuery, [receiptId], (error, result) => {

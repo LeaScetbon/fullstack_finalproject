@@ -7,7 +7,7 @@ function Recipies() {
   const [newRecipie, setNewRecipie] = useState({
     receipt_name: "",
     link: "",
-    receipt_pdf: "",
+    receipt_text: "",
     picture_url: "",
   });
   const [userType, setUserType] = useState("");
@@ -34,7 +34,7 @@ function Recipies() {
 
   const handleAddRecipe = async (event) => {
     event.preventDefault();
-
+    console.log(newRecipie);
     for (const key in newRecipie) {
       if (newRecipie.hasOwnProperty(key) && newRecipie[key] === "") {
         alert("Please fill in all the required fields");
@@ -62,10 +62,12 @@ function Recipies() {
         setNewRecipie({
           receipt_name: "",
           link: "",
-          receipt_pdf: "",
+          receipt_text: "",
           picture_url: "",
         });
       } else {
+      const errorResponse = await response.json(); // Get the error response from the server
+      console.error("Failed to add recipe - Error response:", errorResponse);
         alert("Failed to add recipe");
       }
     } catch (error) {
@@ -75,6 +77,7 @@ function Recipies() {
   };
 
   const handleDeleteRecipe = async (receiptId) => {
+    console.log(receiptId)
     try {
       const response = await fetch(
         `http://localhost:3001/recipes/${receiptId}`,
@@ -169,10 +172,10 @@ function Recipies() {
             />
             <input
               type="text"
-              placeholder="Recipe pdf url"
-              value={newRecipie.receipt_pdf}
+              placeholder="Recipe Text"
+              value={newRecipie.receipt_text}
               onChange={(e) =>
-                setNewRecipie({ ...newRecipie, receipt_pdf: e.target.value })
+                setNewRecipie({ ...newRecipie, receipt_text: e.target.value })
               }
               required
             />
