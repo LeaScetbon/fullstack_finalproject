@@ -34,7 +34,7 @@ function Recipies() {
 
   const handleAddRecipe = async (event) => {
     event.preventDefault();
-    console.log(newRecipie);
+    //console.log(newRecipie);
     for (const key in newRecipie) {
       if (newRecipie.hasOwnProperty(key) && newRecipie[key] === "") {
         alert("Please fill in all the required fields");
@@ -52,13 +52,11 @@ function Recipies() {
       });
 
       if (response.ok) {
+        const addedRecipeData = await response.json();
         alert("Recipe added successfully");
 
-        setAddedRecipies((prevAddedRecipies) => [
-          ...prevAddedRecipies,
-          newRecipie,
-        ]);
-
+        setAddedRecipies((prevAddedRecipies) => [...prevAddedRecipies, addedRecipeData]);
+       
         setNewRecipie({
           receipt_name: "",
           link: "",

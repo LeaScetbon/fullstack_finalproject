@@ -115,13 +115,10 @@ function Products() {
       });
 
       if (response.ok) {
-        // Product added successfully
+        const addedProductData = await response.json();
         alert("Product added successfully");
 
-        setAddedProducts((prevAddedProducts) => [
-          ...prevAddedProducts,
-          newProduct,
-        ]);
+        setAddedProducts((prevAddedProducts) => [...prevAddedProducts, addedProductData]);
 
         setNewProduct({
           product_name: "",
@@ -150,21 +147,6 @@ function Products() {
           method: "DELETE",
         }
       );
-      // const contentType = response.headers.get("content-type");
-
-      // if (!contentType || !contentType.includes("application/json")) {
-      //   throw new Error("Invalid response: Not valid JSON");
-      // }
-
-      // const data = await response.json();
-      // console.log(data)
-      // if (data.length === 0) {
-      //   const deleteResponse = await fetch(
-      //     `http://localhost:3001/products/${productId}`,
-      //     {
-      //       method: "DELETE",
-      //     }
-      //   );
 
       if (response.ok) {
         alert("Product deleted successfully");
