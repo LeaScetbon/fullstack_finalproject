@@ -4,6 +4,7 @@ const productsRouter = require("./productServer");
 const myCartRouter = require("./myCartServer");
 const recipeRouter = require("./recipeServer");
 const paymentRouter = require("./PaymentDetailsServer");
+const productDetailsRouter = require("./ProductDetailsServer");
 const cors = require("cors");
 const app = express();
 
@@ -15,6 +16,7 @@ app.use("/", productsRouter);
 app.use("/", myCartRouter);
 app.use("/", recipeRouter);
 app.use("/", paymentRouter);
+app.use("/", productDetailsRouter);
 
 // Start the server
 app.listen(3001, () => {

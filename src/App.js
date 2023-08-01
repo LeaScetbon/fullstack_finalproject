@@ -13,6 +13,7 @@ import Navbar from "./pages/Navbar";
 import About from "./pages/About";
 import PaymentDetails from "./pages/PaymentDetails";
 import PaymentConfirmation from "./pages/PaymentConfirmation";
+import ProductsDetails from "./pages/ProductsDetails";
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/PaymentDetails" element={<PaymentDetails />} />
           <Route path="/PaymentConfirmation" element={<PaymentConfirmation />} />
+          <Route path="/products/:productId" element={<ProductsDetails />} />
         </Routes>
       </div>
     </>

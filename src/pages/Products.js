@@ -170,6 +170,13 @@ function Products() {
     }
   };
 
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+    navigate(`/products/${productId}`);
+  };
+
+
   return (
     <div className="product">
       <h2>
@@ -180,12 +187,16 @@ function Products() {
           <div key={product.product_id} className="product-item">
             <h3>{product.product_name}</h3>
             {console.log("Product Picture URL:", product.product_picture)}{" "}
-            {/* Add this line */}
-            <img
-              className="product-image"
-              src={product.product_picture}
-              alt={product.product_name}
-            />
+            <Link to={`/products/${product.product_id}`}>
+            
+              <img
+                className="product-image"
+                src={product.product_picture}
+                alt={product.product_name}
+                onClick={() => handleProductClick(product.product_id)} // Add onClick event here
+              />
+            </Link>
+
             <h3>{product.price + "$"}</h3>
             <div className="button-container">
               <button onClick={() => handleAddToCart(product.product_id)}>
