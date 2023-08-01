@@ -254,6 +254,7 @@ function Products() {
               onChange={(e) =>
                 setNewProduct({ ...newProduct, price: e.target.value })
               }
+              min="0"
               required
             />
             <input
@@ -300,6 +301,7 @@ function Products() {
               onChange={(e) =>
                 setNewProduct({ ...newProduct, weight: e.target.value })
               }
+              min="0"
               required
             />
             <button type="submit">Add Product</button>
